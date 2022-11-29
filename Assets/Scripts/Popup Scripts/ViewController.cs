@@ -62,6 +62,7 @@ public class ViewController
 
     public void centerPos(GameObject obj){
         obj.transform.position = new Vector3(0.0f,0.0f,0.0f);
-        obj.transform.localScale = new Vector3(300.0f,300.0f,300.0f);
+        float defaultScale = PlayerPrefs.GetFloat("defaultScale");
+        obj.transform.localScale = new Vector3(defaultScale,defaultScale,defaultScale);
     }
 }

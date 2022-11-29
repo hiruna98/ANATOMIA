@@ -11,14 +11,30 @@ public class MaterialController
 
     private List<Object> gameObjects = new List<Object>();
 
-    public MaterialController(List<GameObject> objects){
-         objects.ForEach(obj =>
+    public MaterialController(){
+        List<GameObject> allGameObjects = new List<GameObject>();
+        allGameObjects.AddRange(GameObject.FindGameObjectsWithTag("Object"));
+
+        allGameObjects.ForEach(obj =>
         {
             Object newObject = new Object();
             newObject.obj = obj;
             newObject.defaultMat = obj.GetComponent<Renderer>().material;
             gameObjects.Add(newObject);
         });
+    }
+
+    private static MaterialController instance = null;
+    public static MaterialController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new MaterialController();
+            }
+            return instance;
+        }
     }
 
     public void addMaterial(GameObject obj, Material mat){
@@ -37,5 +53,13 @@ public class MaterialController
         gameObjects.ForEach(item => {
             item.obj.GetComponent<MeshRenderer>().material = item.defaultMat;
         });
+    }
+
+    public void setDefaultMaterials(GameObject obj)
+    {
+        Object newObject = new Object();
+        newObject.obj = obj;
+        newObject.defaultMat = obj.GetComponent<Renderer>().material;
+        gameObjects.Add(newObject);
     }
 }

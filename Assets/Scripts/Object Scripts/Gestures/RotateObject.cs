@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateObject : MonoBehaviour
 {
 
-    public Camera cam;
+    private Camera cam;
 
     private bool rotating = false;
 
@@ -13,7 +13,7 @@ public class RotateObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class RotateObject : MonoBehaviour
                         break;
                     case TouchPhase.Moved:
                         if(rotating){
-                            transform.Rotate(-touch.deltaPosition.y,-touch.deltaPosition.x,0f, Space.Self);
+                            transform.Rotate(touch.deltaPosition.y,-touch.deltaPosition.x,0f, Space.Self);
                         }
                         break;
                     case TouchPhase.Ended:
