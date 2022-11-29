@@ -59,12 +59,13 @@ public class TouchController : MonoBehaviour
         cam = GetComponent<Camera>();
         multiSelectStore = MultiSelectStore.Instance;
         allGameObjects.AddRange(GameObject.FindGameObjectsWithTag("Object"));
-        materialController = new MaterialController(allGameObjects);
+        materialController = MaterialController.Instance;
         viewController = ViewController.Instance;
         viewController.initializeRotation(root);
         viewPopup = GameObject.Find("View Popup");
         viewPopup.SetActive(false);
-
+        PlayerPrefs.SetFloat("defaultScale",root.transform.localScale.x);
+        PlayerPrefs.Save();
     }
 
     private void Awake()
@@ -170,22 +171,31 @@ public class TouchController : MonoBehaviour
                 }
                 else
                 {
-                    // if multiselect not enabled remove all selected objects from list and add newly touched object
-                    multiSelectStore.removeAllObject();
-                    materialController.removeMaterialOfAllObjects();
-                    multiSelectStore.addObject(hitObject);
-                    materialController.addMaterial(hitObject,selectionMat);
-                    if (SelectionMode == SelMode.AndChildren)
-                    {
-                        List<GameObject> childrenRenderers = new List<GameObject>();
-                        foreach (Transform child in hit.transform){
-                            childrenRenderers.Add(child.gameObject);
-                        }
-                        childrenRenderers.ForEach(r =>
+                    int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
+                    int crossSectionSelection = PlayerPrefs.GetInt("crossSectionSelection");
+                    Debug.Log(crossSectionEnable);
+                    if(crossSectionEnable == 1 && crossSectionSelection == 1){
+                        hitObject.SetActive(false);
+                        PlayerPrefs.SetInt("crossSectionSelection",0);
+                        PlayerPrefs.Save();
+                    }else{
+                        // if multiselect not enabled remove all selected objects from list and add newly touched object
+                        multiSelectStore.removeAllObject();
+                        materialController.removeMaterialOfAllObjects();
+                        multiSelectStore.addObject(hitObject);
+                        materialController.addMaterial(hitObject,selectionMat);
+                        if (SelectionMode == SelMode.AndChildren)
                         {
-                            multiSelectStore.addObject(r);
-                            materialController.addMaterial(r,selectionMat);
-                        });
+                            List<GameObject> childrenRenderers = new List<GameObject>();
+                            foreach (Transform child in hit.transform){
+                                childrenRenderers.Add(child.gameObject);
+                            }
+                            childrenRenderers.ForEach(r =>
+                            {
+                                multiSelectStore.addObject(r);
+                                materialController.addMaterial(r,selectionMat);
+                            });
+                        }
                     }
                 }
             }
@@ -196,14 +206,14 @@ public class TouchController : MonoBehaviour
             // if hit outside un select all
             if (multisilectEnable)
             {
-                multiSelectStore.removeAllObject();
                 materialController.removeMaterialOfAllObjects();
+                multiSelectStore.removeAllObject();
                 multisilectEnable = false;
             }
             else
             {
-                multiSelectStore.removeAllObject();
                 materialController.removeMaterialOfAllObjects();
+                multiSelectStore.removeAllObject();
             }
         }
     }
