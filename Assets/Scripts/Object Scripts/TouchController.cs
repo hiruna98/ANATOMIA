@@ -172,8 +172,6 @@ public class TouchController : MonoBehaviour
                                 GameObject slicedObj = GameObject.Find("slicedObjects");
                                 Destroy(slicedObj);
                                 root.SetActive(true);
-                                PlayerPrefs.SetInt("crossSectionEnable",0);
-                                PlayerPrefs.Save();
                             }else{
                                 fourTapCount = 1;
                                 firstTapTime = secondTimeTap;
