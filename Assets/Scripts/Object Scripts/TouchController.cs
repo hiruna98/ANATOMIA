@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Camera))]
 public class TouchController : MonoBehaviour
@@ -16,6 +17,17 @@ public class TouchController : MonoBehaviour
 
     private Vector2 startPos;
     private Vector2 endPos;
+
+    private int fourTapCount = 0;
+    private Vector2 touch0_startpos;
+    private Vector2 touch1_startpos;
+    private Vector2 touch2_startpos;
+    private Vector2 touch3_startpos;
+
+    private Vector2 touch0_endpos;
+    private Vector2 touch1_endpos;
+    private Vector2 touch2_endpos;
+    private Vector2 touch3_endpos;
 
     //to identify long press
     private float timePressed = 0.0f;
@@ -42,6 +54,8 @@ public class TouchController : MonoBehaviour
     //to capture double tap
     private int tapCount = 0;
     public float doubleTapDelayThershold = 0.5f;
+
+    public Vector2 forfingerTapAreaThreashold = new Vector2(1.0f,1.0f);
     private float firstTapTime = 0.0f;
     private float secondTimeTap = 0.0f;
 
@@ -93,6 +107,7 @@ public class TouchController : MonoBehaviour
 
                         if (endPos == startPos)
                         {
+                            Debug.Log("Tap");
                             tapCount++;
                             if(tapCount == 1){
                                 firstTapTime = Time.time;
@@ -100,6 +115,7 @@ public class TouchController : MonoBehaviour
                                 secondTimeTap = Time.time;
                                 if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold){
                                     tapCount = 0;
+                                    Debug.Log("Double Tap");
                                     viewController.antRotation(root);
                                 }else{
                                     tapCount = 1;
@@ -116,6 +132,56 @@ public class TouchController : MonoBehaviour
                         break;
                 }
                 
+            }
+            if(Input.touchCount == 4)
+            {
+                Touch touch0 = Input.GetTouch(0);
+                Touch touch1 = Input.GetTouch(1);
+                Touch touch2 = Input.GetTouch(2);
+                Touch touch3 = Input.GetTouch(3);
+
+                if(touch0.phase == TouchPhase.Began || touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began || touch3.phase == TouchPhase.Began ){
+                    touch0_startpos = touch0.position;
+                    touch1_startpos = touch1.position;
+                    touch2_startpos = touch2.position;
+                    touch3_startpos = touch3.position;
+                }
+                if(touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended || touch3.phase == TouchPhase.Ended){
+                    touch0_endpos = touch0.position;
+                    touch1_endpos = touch1.position;
+                    touch2_endpos = touch2.position;
+                    touch3_endpos = touch3.position;
+                    Vector2 v0 = new Vector2(Math.Abs(touch0_endpos.x-touch0_startpos.x),Math.Abs(touch0_endpos.y-touch0_startpos.y));
+                    Vector2 v1 = new Vector2(Math.Abs(touch1_endpos.x-touch1_startpos.x),Math.Abs(touch1_endpos.y-touch1_startpos.y));
+                    Vector2 v2 = new Vector2(Math.Abs(touch2_endpos.x-touch2_startpos.x),Math.Abs(touch2_endpos.y-touch2_startpos.y));
+                    Vector2 v3 = new Vector2(Math.Abs(touch3_endpos.x-touch3_startpos.x),Math.Abs(touch3_endpos.y-touch3_startpos.y));
+                    //Vector2 v4 = new Vector2(Math.Abs(touch4_endpos.x-touch4_startpos.x),Math.Abs(touch4_endpos.y-touch4_startpos.y));
+                    
+
+                    if (v0.x < forfingerTapAreaThreashold.x && v0.y < forfingerTapAreaThreashold.y && v1.x < forfingerTapAreaThreashold.x && v1.y < forfingerTapAreaThreashold.y && v2.x < forfingerTapAreaThreashold.x && v2.y < forfingerTapAreaThreashold.y && v3.x < forfingerTapAreaThreashold.x && v3.y < forfingerTapAreaThreashold.y)
+                    {
+                        fourTapCount++;
+                        if(fourTapCount == 1){
+                            firstTapTime = Time.time;
+                        }else if(fourTapCount >=2){
+                            secondTimeTap = Time.time;
+                            int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
+                            if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold && crossSectionEnable == 1){
+                                fourTapCount = 0;
+                                Debug.Log("Four finget double tap");
+                                GameObject slicedObj = GameObject.Find("slicedObjects");
+                                Destroy(slicedObj);
+                                root.SetActive(true);
+                                PlayerPrefs.SetInt("crossSectionEnable",0);
+                                PlayerPrefs.Save();
+                            }else{
+                                fourTapCount = 1;
+                                firstTapTime = secondTimeTap;
+                            }
+                        }
+                    }
+
+                }
             }
 
         }

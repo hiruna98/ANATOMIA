@@ -11,7 +11,7 @@ public class MaterialController
 
     private List<Object> gameObjects = new List<Object>();
 
-    public MaterialController(){
+    private MaterialController(){
         List<GameObject> allGameObjects = new List<GameObject>();
         allGameObjects.AddRange(GameObject.FindGameObjectsWithTag("Object"));
 
