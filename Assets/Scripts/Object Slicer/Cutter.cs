@@ -87,6 +87,7 @@ public class Cutter : MonoBehaviour
         right.tag = "Object";
         cutobject.tag = "Object";
 
+
         right.AddComponent<LeanDragTranslate>().Use.RequiredFingerCount = 3;
         cutobject.AddComponent<LeanDragTranslate>().Use.RequiredFingerCount = 3;
         right.AddComponent<RotateObject>();
@@ -98,9 +99,22 @@ public class Cutter : MonoBehaviour
         materialController.setDefaultMaterials(cutobject);
         materialController.setDefaultMaterials(right);        
 
+        int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
+        if(crossSectionEnable == 1){
+            GameObject parent = GameObject.Find("slicedObjects");
 
-        // right.transform.SetParent(rootTransform);
-        // cutobject.transform.SetParent(rootTransform);
+            right.transform.SetParent(parent.transform);
+            cutobject.transform.SetParent(parent.transform);
+        }else{
+            GameObject parent = new GameObject();
+            parent.transform.position = cutobject.transform.position;
+            parent.name = "slicedObjects";
+
+            right.transform.SetParent(parent.transform);
+            cutobject.transform.SetParent(parent.transform);
+        }
+        
+        
         PlayerPrefs.SetInt("crossSectionEnable",1);
         PlayerPrefs.SetInt("crossSectionSelection",1);
         PlayerPrefs.Save();
