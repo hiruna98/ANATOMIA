@@ -155,6 +155,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "io.realm.unity": {
+      "version": "file:C:/Users/ASUS/Downloads/io.realm.unity-10.18.0/package",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
