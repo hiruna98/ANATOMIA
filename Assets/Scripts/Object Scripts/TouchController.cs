@@ -145,6 +145,7 @@ public class TouchController : MonoBehaviour
                     touch1_startpos = touch1.position;
                     touch2_startpos = touch2.position;
                     touch3_startpos = touch3.position;
+                    timePressed = Time.time;
                 }
                 if(touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended || touch3.phase == TouchPhase.Ended){
                     touch0_endpos = touch0.position;
@@ -156,28 +157,38 @@ public class TouchController : MonoBehaviour
                     Vector2 v2 = new Vector2(Math.Abs(touch2_endpos.x-touch2_startpos.x),Math.Abs(touch2_endpos.y-touch2_startpos.y));
                     Vector2 v3 = new Vector2(Math.Abs(touch3_endpos.x-touch3_startpos.x),Math.Abs(touch3_endpos.y-touch3_startpos.y));
                     //Vector2 v4 = new Vector2(Math.Abs(touch4_endpos.x-touch4_startpos.x),Math.Abs(touch4_endpos.y-touch4_startpos.y));
+                    timeLastPress = Time.time;
                     
 
-                    if (v0.x < forfingerTapAreaThreashold.x && v0.y < forfingerTapAreaThreashold.y && v1.x < forfingerTapAreaThreashold.x && v1.y < forfingerTapAreaThreashold.y && v2.x < forfingerTapAreaThreashold.x && v2.y < forfingerTapAreaThreashold.y && v3.x < forfingerTapAreaThreashold.x && v3.y < forfingerTapAreaThreashold.y)
+                    // if (v0.x < forfingerTapAreaThreashold.x && v0.y < forfingerTapAreaThreashold.y && v1.x < forfingerTapAreaThreashold.x && v1.y < forfingerTapAreaThreashold.y && v2.x < forfingerTapAreaThreashold.x && v2.y < forfingerTapAreaThreashold.y && v3.x < forfingerTapAreaThreashold.x && v3.y < forfingerTapAreaThreashold.y)
+                    // {
+                    //     fourTapCount++;
+                    //     if(fourTapCount == 1){
+                    //         firstTapTime = Time.time;
+                    //     }else if(fourTapCount >=2){
+                    //         secondTimeTap = Time.time;
+                    //         int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
+                    //         if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold && crossSectionEnable == 1){
+                    //             fourTapCount = 0;
+                    //             Debug.Log("Four finget double tap");
+                    //             GameObject slicedObj = GameObject.Find("slicedObjects");
+                    //             Destroy(slicedObj);
+                    //             root.SetActive(true);
+                    //         }else{
+                    //             fourTapCount = 1;
+                    //             firstTapTime = secondTimeTap;
+                    //         }
+                    //     }
+                    // }
+
+                    if ((timeLastPress - timePressed) < timeDelayThreshold)
                     {
-                        fourTapCount++;
-                        if(fourTapCount == 1){
-                            firstTapTime = Time.time;
-                        }else if(fourTapCount >=2){
-                            secondTimeTap = Time.time;
-                            int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
-                            if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold && crossSectionEnable == 1){
-                                fourTapCount = 0;
-                                Debug.Log("Four finget double tap");
-                                GameObject slicedObj = GameObject.Find("slicedObjects");
-                                Destroy(slicedObj);
-                                root.SetActive(true);
-                            }else{
-                                fourTapCount = 1;
-                                firstTapTime = secondTimeTap;
-                            }
-                        }
+                        Debug.Log("Four finget double tap");
+                        GameObject slicedObj = GameObject.Find("slicedObjects");
+                        Destroy(slicedObj);
+                        root.SetActive(true);
                     }
+                    
 
                 }
             }
