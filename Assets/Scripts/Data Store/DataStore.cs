@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 using Realms;
+using System.Linq;
 
 public class DataStore
 {
@@ -30,7 +31,7 @@ public class DataStore
     }
 
     public DataModel FindOrgan(string name){
-        dataModel = realm.All<DataModel>().Where(organ=> organ.name=name).first();
+        dataModel = realm.All<DataModel>().Where(organ=> organ.Name==name).First();
         if(dataModel == null){
             dataModel = new DataModel("","");
             return dataModel;

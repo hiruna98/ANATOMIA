@@ -1,6 +1,7 @@
 using Realms;
+using MongoDB.Bson;
 
-public class DataModel 
+public class DataModel : RealmObject
 {
     [PrimaryKey]
     [MapTo("id")]
@@ -17,7 +18,7 @@ public class DataModel
    }
 
    public DataModel (string Name, string Description){
-    this.Id=ObjectID.GenerateNewId;
+    this.Id=ObjectId.GenerateNewId();
     this.Name = Name;
     this.Description = Description;
    }
