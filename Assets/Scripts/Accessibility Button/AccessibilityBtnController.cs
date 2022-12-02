@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AccessibilityBtnController : MonoBehaviour
 {
@@ -96,5 +97,7 @@ public class AccessibilityBtnController : MonoBehaviour
         Debug.Log("Draw btn clicked");
     }
 
-    
+    public void handleBackToMainMenu(){
+        SceneManager.LoadScene((int)SceneIndexes.MAIN_MENU);
+    }
 }

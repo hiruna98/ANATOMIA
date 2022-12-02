@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Temp/Detail UIs.unity
     guid: 95741c54dcdbd9045af645222e00935e
+  - enabled: 1
+    path: Assets/Scenes/CrossSectionScene.unity
+    guid: 4a73b759ce8e80a44b7116423b4bf4a3
+  - enabled: 1
+    path: Assets/Scenes/ModelScene.unity
+    guid: 02cdcd756e17c234da8a13ea22fbb7e4
   m_configObjects: {}
