@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Threading;
+
+public class MainMenuController : MonoBehaviour
+{
+    // public static MainMenuController instance;
+
+    private static string clickedCard;
+
+    public GameObject MainMenu;
+    public GameObject LoadingScreen;
+    // public ProgressBar bar;
+
+    void Awake()
+    {
+        // instance = this;
+    }
+
+    public static string returnClickedCard()
+    {
+        return clickedCard;
+    }
+
+    public void test()
+    {
+        Debug.Log("wewewew");
+    }
+
+    public void handleCardClick(string name)
+    {
+        Debug.Log("card click");
+        clickedCard = name;
+        LoadingScreen.gameObject.SetActive(true);
+        MainMenu.gameObject.SetActive(false);
+        
+        // StartCoroutine(GetSceneLoadProgress());
+        SceneManager.LoadScene((int)SceneIndexes.TEMP);
+
+        LoadingScreen.gameObject.SetActive(false);
+        LoadingScreen.gameObject.SetActive(false);
+    }
+
+    // float totalSceneProgress;
+    public IEnumerator GetSceneLoadProgress()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)SceneIndexes.TEMP);
+
+        while (!asyncLoad.isDone)
+        {
+            // totalSceneProgress = 0;
+            yield return null;
+        }
+    }
+}
+
+
