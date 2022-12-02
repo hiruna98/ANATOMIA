@@ -85,17 +85,17 @@ namespace Lean.Touch
 
 				if(Physics.Raycast(ray1, out hit1)){
 					hitObject = hit1.transform.gameObject;
-					if(hitObject.name == this.gameObject.name){
+					if(hitObject.tag == "Object"){
 						drag();
 					}
 				}else if(Physics.Raycast(ray2, out hit2)){
 					hitObject = hit2.transform.gameObject;
-					if(hitObject.name == this.gameObject.name){
+					if(hitObject.tag == "Object"){
 						drag();
 					}
 				}else if(Physics.Raycast(ray3, out hit3)){
 					hitObject = hit3.transform.gameObject;
-					if(hitObject.name == this.gameObject.name){
+					if(hitObject.tag == "Object"){
 						drag();
 					}
 				}
