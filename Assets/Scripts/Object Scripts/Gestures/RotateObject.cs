@@ -39,7 +39,7 @@ public class RotateObject : MonoBehaviour
                         break;
                     case TouchPhase.Moved:
                         if(rotating){
-                            transform.Rotate(touch.deltaPosition.y,-touch.deltaPosition.x,0f, Space.Self);
+                            transform.Rotate(-touch.deltaPosition.y,-touch.deltaPosition.x,0f, Space.Self);
                         }
                         break;
                     case TouchPhase.Ended:
