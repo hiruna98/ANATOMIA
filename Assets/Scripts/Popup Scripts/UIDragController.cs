@@ -16,8 +16,8 @@ public class UIDragController : MonoBehaviour
         uIRotateController = UIRotateController.Instance;
         PointerEventData pointerData = (PointerEventData)data;
 
-        Vector3 position;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+        Vector2 position;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
             (RectTransform)canvas.transform,
             pointerData.position,
             canvas.worldCamera,
