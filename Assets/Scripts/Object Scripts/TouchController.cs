@@ -115,7 +115,6 @@ public class TouchController : MonoBehaviour
                                 secondTimeTap = Time.time;
                                 if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold){
                                     tapCount = 0;
-                                    Debug.Log("Double Tap");
                                     viewController.antRotation(root);
                                 }else{
                                     tapCount = 1;
@@ -183,7 +182,6 @@ public class TouchController : MonoBehaviour
 
                     if ((timeLastPress - timePressed) < timeDelayThreshold)
                     {
-                        Debug.Log("Four finget double tap");
                         GameObject slicedObj = GameObject.Find("slicedObjects");
                         Destroy(slicedObj);
                         root.SetActive(true);
