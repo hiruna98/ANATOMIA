@@ -38,7 +38,13 @@ public class MainMenuController : MonoBehaviour
         MainMenu.gameObject.SetActive(false);
         
         // StartCoroutine(GetSceneLoadProgress());
-        SceneManager.LoadScene((int)SceneIndexes.TEMP);
+        // SceneManager.LoadScene((int)SceneIndexes.TEMP);
+
+        if(name == "heart"){
+            SceneManager.LoadScene((int)SceneIndexes.MODEL_SCENE);
+        }else if(name == "skull"){
+            SceneManager.LoadScene((int)SceneIndexes.CROSS_SECTION_SCENE);
+        }
 
         LoadingScreen.gameObject.SetActive(false);
         LoadingScreen.gameObject.SetActive(false);
