@@ -17,8 +17,8 @@ public class RadialMenuDragController : MonoBehaviour
         uIRotateController = UIRotateController.Instance;
         PointerEventData pointerData = (PointerEventData)data;
 
-        Vector3 position;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+        Vector2 position;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
             (RectTransform)canvas.transform,
             pointerData.position,
             canvas.worldCamera,
@@ -36,7 +36,11 @@ public class RadialMenuDragController : MonoBehaviour
         foreach(GameObject popup in popupList)
         {
             // popup.transform.rotation = Quaternion.Euler(0,0,transform.rotation.z);
-            uIRotateController.Rotate(transform,popup.transform);
+            string key = popup.name + " RotationLock";
+            int rotationLock = PlayerPrefs.GetInt(key);
+            if(rotationLock == 0){
+                uIRotateController.Rotate(transform,popup.transform);
+            }
         }
     }
 

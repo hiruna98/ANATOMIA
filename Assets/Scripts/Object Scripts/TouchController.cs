@@ -76,8 +76,8 @@ public class TouchController : MonoBehaviour
         materialController = MaterialController.Instance;
         viewController = ViewController.Instance;
         viewController.initializeRotation(root);
-        viewPopup = GameObject.Find("View Popup");
-        viewPopup.SetActive(false);
+        // viewPopup = GameObject.Find("View Popup");
+        // viewPopup.SetActive(false);
         PlayerPrefs.SetFloat("defaultScale",root.transform.localScale.x);
         PlayerPrefs.Save();
     }

@@ -12,14 +12,21 @@ public class ButtonEventHandler : MonoBehaviour
     private IsolationController isolationController;
     private ViewController viewController;
 
-    private GameObject viewPopup;
-    private void Awake()
+    private GameObject viewPopupLockBtn;
+    private GameObject viewPopupUnlockBtn;
+    private GameObject functionPopupLockBtn;
+    private GameObject functionPopupUnlockBtn;
+
+    private void Start()
     {
         obj = GameObject.Find("root_object");
         multiSelectStore = MultiSelectStore.Instance;
         viewController = ViewController.Instance;
         isolationController = new IsolationController();
-        viewPopup = GameObject.Find("View Popup");
+        viewPopupLockBtn   = GameObject.Find("View Modal/Top Bar/Lock Btn");
+        viewPopupUnlockBtn = GameObject.Find("View Modal/Top Bar/Unlock Btn");
+        functionPopupLockBtn   = GameObject.Find("Functions Modal/Top Bar/Lock Btn");
+        functionPopupUnlockBtn = GameObject.Find("Functions Modal/Top Bar/Unlock Btn");
     }
     public void onIsolateBtnClick()
     {
@@ -36,16 +43,6 @@ public class ButtonEventHandler : MonoBehaviour
         isolationController.redo();
     }
 
-    public void onViewPopupOpenClick(){
-        string prefName = viewPopup.name + "DefaultZ";
-        PlayerPrefs.SetInt(prefName,0);
-        PlayerPrefs.Save();
-        viewPopup.SetActive(true);
-    }
-
-    public void onViewPopupCloseClick(){
-        viewPopup.SetActive(false);
-    }
 
     public void onCenterClicked(){
         viewController.centerPos(obj);
@@ -81,11 +78,27 @@ public class ButtonEventHandler : MonoBehaviour
     }
 
     public void onViewPopupLockRotation(){
-        PlayerPrefs.SetInt("ViewRotationLock",1);
+        PlayerPrefs.SetInt("View Modal Container RotationLock",1);
+        viewPopupLockBtn.SetActive(false);
+        viewPopupUnlockBtn.SetActive(true);
     }
 
     public void onViewPopupUnlockRotation(){
-        PlayerPrefs.SetInt("ViewRotationLock",0);
+        PlayerPrefs.SetInt("View Modal Container RotationLock",0);
+        viewPopupLockBtn.SetActive(true);
+        viewPopupUnlockBtn.SetActive(false);
+    }
+
+    public void onFunctionPopupLockRotation(){
+        PlayerPrefs.SetInt("Functions Modal Container RotationLock",1);
+        functionPopupLockBtn.SetActive(false);
+        functionPopupUnlockBtn.SetActive(true);
+    }
+
+    public void onFunctionPopupUnlockRotation(){
+        PlayerPrefs.SetInt("Functions Modal Container RotationLock",0);
+        functionPopupLockBtn.SetActive(true);
+        functionPopupUnlockBtn.SetActive(false);
     }
 
 }
