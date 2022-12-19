@@ -10,6 +10,7 @@ public class AccessibilityBtnController : MonoBehaviour
     private GameObject radialMenu;
     private GameObject viewModal;
     private GameObject functionsModal;
+    public GameObject infoModel;
 
     private Button viewBtn;
     private Button functionBtn;
@@ -21,6 +22,7 @@ public class AccessibilityBtnController : MonoBehaviour
         radialMenu = GameObject.Find("Radial Menu");
         viewModal = GameObject.Find("View Modal");
         functionsModal = GameObject.Find("Functions Modal");
+        // infoModel = GameObject.Find("Info Model");
 
         viewBtn = GameObject.Find("Radial Menu/Background/Elements/View/Button").GetComponent<Button>();
         functionBtn = GameObject.Find("Radial Menu/Background/Elements/Functions/Button").GetComponent<Button>();
@@ -97,7 +99,23 @@ public class AccessibilityBtnController : MonoBehaviour
         Debug.Log("Draw btn clicked");
     }
 
+    /*
+    * Back to Main Menu
+    */
     public void handleBackToMainMenu(){
         SceneManager.LoadScene((int)SceneIndexes.MAIN_MENU);
+    }
+
+    /*
+    * Info model
+    */
+    public void handleInfoModelOpen()
+    {
+        infoModel.SetActive(true);
+    }
+
+    public void handleInfoModelClose()
+    {
+        infoModel.SetActive(false);
     }
 }

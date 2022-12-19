@@ -18,17 +18,6 @@ public class TouchController : MonoBehaviour
     private Vector2 startPos;
     private Vector2 endPos;
 
-    private int fourTapCount = 0;
-    private Vector2 touch0_startpos;
-    private Vector2 touch1_startpos;
-    private Vector2 touch2_startpos;
-    private Vector2 touch3_startpos;
-
-    private Vector2 touch0_endpos;
-    private Vector2 touch1_endpos;
-    private Vector2 touch2_endpos;
-    private Vector2 touch3_endpos;
-
     //to identify long press
     private float timePressed = 0.0f;
     private float timeLastPress = 0.0f;
@@ -36,9 +25,16 @@ public class TouchController : MonoBehaviour
 
     private bool multisilectEnable = false;
 
+    //maximum difference bitween startpos and endpos of single tap
+    public float tapThreshold = 2.0f;
+
     //root of the object hierarchy
     public GameObject root;
     //public GameObject rotationPoint;
+
+    public GameObject infoModel;
+
+    private Animation infoAnim;
 
     private MultiSelectStore multiSelectStore;
 
@@ -104,90 +100,36 @@ public class TouchController : MonoBehaviour
                     case TouchPhase.Ended:
                         endPos = touch.position;
                         timeLastPress = Time.time;
-
-                        if (endPos == startPos)
+                        if ((timeLastPress - timePressed) > timeDelayThreshold && touch.tapCount == 1)
                         {
-                            Debug.Log("Tap");
-                            tapCount++;
-                            if(tapCount == 1){
-                                firstTapTime = Time.time;
-                            }else if(tapCount >=2){
-                                secondTimeTap = Time.time;
-                                if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold){
-                                    tapCount = 0;
-                                    viewController.antRotation(root);
-                                }else{
-                                    tapCount = 1;
-                                    firstTapTime = secondTimeTap;
-                                }
-                            }
-                            if ((timeLastPress - timePressed) > timeDelayThreshold)
-                            {
-                                multisilectEnable = true;   //If loag press enable multiple selection option
-                            }
+                            multisilectEnable = true;   //If loag press enable multiple selection option
                             //Select touched object
                             SelectObject(touch);
+                        }else if((timeLastPress - timePressed) < timeDelayThreshold && touch.tapCount == 1){
+                            SelectObject(touch);
                         }
+                        if((timeLastPress - timePressed) < timeDelayThreshold && touch.tapCount == 2){
+                            viewController.antRotation(root);
+                        }
+                            
                         break;
                 }
                 
+                
             }
-            if(Input.touchCount == 4)
+            if(Input.touchCount == 5)
             {
                 Touch touch0 = Input.GetTouch(0);
                 Touch touch1 = Input.GetTouch(1);
                 Touch touch2 = Input.GetTouch(2);
                 Touch touch3 = Input.GetTouch(3);
+                Touch touch4 = Input.GetTouch(4);
 
-                if(touch0.phase == TouchPhase.Began || touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began || touch3.phase == TouchPhase.Began ){
-                    touch0_startpos = touch0.position;
-                    touch1_startpos = touch1.position;
-                    touch2_startpos = touch2.position;
-                    touch3_startpos = touch3.position;
-                    timePressed = Time.time;
-                }
-                if(touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended || touch3.phase == TouchPhase.Ended){
-                    touch0_endpos = touch0.position;
-                    touch1_endpos = touch1.position;
-                    touch2_endpos = touch2.position;
-                    touch3_endpos = touch3.position;
-                    Vector2 v0 = new Vector2(Math.Abs(touch0_endpos.x-touch0_startpos.x),Math.Abs(touch0_endpos.y-touch0_startpos.y));
-                    Vector2 v1 = new Vector2(Math.Abs(touch1_endpos.x-touch1_startpos.x),Math.Abs(touch1_endpos.y-touch1_startpos.y));
-                    Vector2 v2 = new Vector2(Math.Abs(touch2_endpos.x-touch2_startpos.x),Math.Abs(touch2_endpos.y-touch2_startpos.y));
-                    Vector2 v3 = new Vector2(Math.Abs(touch3_endpos.x-touch3_startpos.x),Math.Abs(touch3_endpos.y-touch3_startpos.y));
-                    //Vector2 v4 = new Vector2(Math.Abs(touch4_endpos.x-touch4_startpos.x),Math.Abs(touch4_endpos.y-touch4_startpos.y));
-                    timeLastPress = Time.time;
-                    
-
-                    // if (v0.x < forfingerTapAreaThreashold.x && v0.y < forfingerTapAreaThreashold.y && v1.x < forfingerTapAreaThreashold.x && v1.y < forfingerTapAreaThreashold.y && v2.x < forfingerTapAreaThreashold.x && v2.y < forfingerTapAreaThreashold.y && v3.x < forfingerTapAreaThreashold.x && v3.y < forfingerTapAreaThreashold.y)
-                    // {
-                    //     fourTapCount++;
-                    //     if(fourTapCount == 1){
-                    //         firstTapTime = Time.time;
-                    //     }else if(fourTapCount >=2){
-                    //         secondTimeTap = Time.time;
-                    //         int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
-                    //         if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold && crossSectionEnable == 1){
-                    //             fourTapCount = 0;
-                    //             Debug.Log("Four finget double tap");
-                    //             GameObject slicedObj = GameObject.Find("slicedObjects");
-                    //             Destroy(slicedObj);
-                    //             root.SetActive(true);
-                    //         }else{
-                    //             fourTapCount = 1;
-                    //             firstTapTime = secondTimeTap;
-                    //         }
-                    //     }
-                    // }
-
-                    if ((timeLastPress - timePressed) < timeDelayThreshold)
-                    {
-                        GameObject slicedObj = GameObject.Find("slicedObjects");
-                        Destroy(slicedObj);
-                        root.SetActive(true);
-                    }
-                    
-
+                if(touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended && touch3.phase == TouchPhase.Ended && touch4.phase == TouchPhase.Ended && touch0.tapCount == 1 && touch1.tapCount == 1 && touch2.tapCount == 1 && touch3.tapCount == 1 && touch4.tapCount == 1)
+                {
+                    GameObject slicedObj = GameObject.Find("slicedObjects");
+                    Destroy(slicedObj);
+                    root.SetActive(true);
                 }
             }
 
@@ -229,6 +171,7 @@ public class TouchController : MonoBehaviour
                     // if multi select enabled and hit an object -> add it and its children to the multi select store and add selection material
                     multiSelectStore.addObject(hitObject);
                     materialController.addMaterial(hitObject,selectionMat);
+                    //infoModel.SetActive(false);
                     if (SelectionMode == SelMode.AndChildren)
                     {
                         List<GameObject> childrenRenderers = new List<GameObject>();
@@ -247,7 +190,7 @@ public class TouchController : MonoBehaviour
                     int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
                     int crossSectionSelection = PlayerPrefs.GetInt("crossSectionSelection");
                     Debug.Log(crossSectionEnable);
-                    if(crossSectionEnable == 1 && crossSectionSelection == 1){
+                    if(crossSectionSelection == 1){
                         hitObject.SetActive(false);
                         PlayerPrefs.SetInt("crossSectionSelection",0);
                         PlayerPrefs.Save();
@@ -257,6 +200,9 @@ public class TouchController : MonoBehaviour
                         materialController.removeMaterialOfAllObjects();
                         multiSelectStore.addObject(hitObject);
                         materialController.addMaterial(hitObject,selectionMat);
+                        //infoModel.SetActive(true);
+                        // infoAnim.Play("IM_Open");
+                        // infoModel.transform.localScale = new Vector3(1,1,1);
                         if (SelectionMode == SelMode.AndChildren)
                         {
                             List<GameObject> childrenRenderers = new List<GameObject>();
@@ -281,11 +227,13 @@ public class TouchController : MonoBehaviour
             {
                 materialController.removeMaterialOfAllObjects();
                 multiSelectStore.removeAllObject();
+                //infoModel.SetActive(false);
                 multisilectEnable = false;
             }
             else
             {
                 materialController.removeMaterialOfAllObjects();
+                //infoModel.SetActive(false);
                 multiSelectStore.removeAllObject();
             }
         }
