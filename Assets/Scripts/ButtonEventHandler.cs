@@ -17,6 +17,9 @@ public class ButtonEventHandler : MonoBehaviour
     private GameObject functionPopupLockBtn;
     private GameObject functionPopupUnlockBtn;
 
+    private GameObject infoPopupLockBtn;
+    private GameObject infoPopupUnlockBtn;
+
     private void Start()
     {
         obj = GameObject.Find("root_object");
@@ -27,6 +30,8 @@ public class ButtonEventHandler : MonoBehaviour
         viewPopupUnlockBtn = GameObject.Find("View Modal/Top Bar/Unlock Btn");
         functionPopupLockBtn   = GameObject.Find("Functions Modal/Top Bar/Lock Btn");
         functionPopupUnlockBtn = GameObject.Find("Functions Modal/Top Bar/Unlock Btn");
+        infoPopupLockBtn   = GameObject.Find("Info Model/Top Bar/Lock Btn");
+        infoPopupUnlockBtn = GameObject.Find("Info Model/Top Bar/Unlock Btn");
     }
     public void onIsolateBtnClick()
     {
@@ -99,6 +104,18 @@ public class ButtonEventHandler : MonoBehaviour
         PlayerPrefs.SetInt("Functions Modal Container RotationLock",0);
         functionPopupLockBtn.SetActive(true);
         functionPopupUnlockBtn.SetActive(false);
+    }
+
+    public void onInfoPopupLockRotation(){
+        PlayerPrefs.SetInt("Info Modal Container RotationLock",1);
+        infoPopupLockBtn.SetActive(false);
+        infoPopupUnlockBtn.SetActive(true);
+    }
+
+    public void onInfoPopupUnlockRotation(){
+        PlayerPrefs.SetInt("Info Modal Container RotationLock",0);
+        infoPopupLockBtn.SetActive(true);
+        infoPopupUnlockBtn.SetActive(false);
     }
 
 }

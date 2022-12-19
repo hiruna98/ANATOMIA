@@ -72,7 +72,7 @@ namespace Lean.Touch
 
 		protected virtual void Update()
 		{
-			if (Input.touchCount == 3){
+			if (Input.touchCount == 5){
 
 				Ray ray1 = cam.GetComponent<Camera>().ScreenPointToRay(Input.GetTouch(0).position);
                 RaycastHit hit1;
@@ -80,6 +80,10 @@ namespace Lean.Touch
                 RaycastHit hit2;
                 Ray ray3 = cam.GetComponent<Camera>().ScreenPointToRay(Input.GetTouch(2).position);
                 RaycastHit hit3;
+				Ray ray4 = cam.GetComponent<Camera>().ScreenPointToRay(Input.GetTouch(3).position);
+                RaycastHit hit4;
+				Ray ray5 = cam.GetComponent<Camera>().ScreenPointToRay(Input.GetTouch(4).position);
+                RaycastHit hit5;
 
 				GameObject hitObject;
 
@@ -95,6 +99,16 @@ namespace Lean.Touch
 					}
 				}else if(Physics.Raycast(ray3, out hit3)){
 					hitObject = hit3.transform.gameObject;
+					if(hitObject.tag == "Object"){
+						drag();
+					}
+				}else if(Physics.Raycast(ray4, out hit4)){
+					hitObject = hit4.transform.gameObject;
+					if(hitObject.tag == "Object"){
+						drag();
+					}
+				}else if(Physics.Raycast(ray5, out hit5)){
+					hitObject = hit5.transform.gameObject;
 					if(hitObject.tag == "Object"){
 						drag();
 					}

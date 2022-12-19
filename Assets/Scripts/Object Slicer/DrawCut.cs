@@ -59,24 +59,24 @@ public class DrawCut : MonoBehaviour
         // }
 
         //Touch
-        if (Input.touchCount == 5 && Input.GetTouch(4).phase == TouchPhase.Began)
+        if (Input.touchCount == 6 && Input.GetTouch(5).phase == TouchPhase.Began)
         {
-            pointA = cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(4).position.x,Input.GetTouch(4).position.y,(rootObject.transform.position.z-cam.transform.position.z)));
+            pointA = cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(5).position.x,Input.GetTouch(5).position.y,(rootObject.transform.position.z-cam.transform.position.z)));
             // pointA = cam.ScreenToWorldPoint(mouse);
         }
 
-        if (Input.touchCount == 5)
+        if (Input.touchCount == 6)
         {
             animateCut = false;
             cutRender.SetPosition(0,pointA);
-            cutRender.SetPosition(1,cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(4).position.x,Input.GetTouch(4).position.y,(rootObject.transform.position.z-cam.transform.position.z))));
+            cutRender.SetPosition(1,cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(5).position.x,Input.GetTouch(5).position.y,(rootObject.transform.position.z-cam.transform.position.z))));
             //cutRender.SetPosition(1,cam.ScreenToWorldPoint(mouse));
             cutRender.startColor = Color.gray;
             cutRender.endColor = Color.gray;
         }
 
-        if (Input.touchCount == 5 && Input.GetTouch(4).phase == TouchPhase.Ended) {
-            pointB = cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(4).position.x,Input.GetTouch(4).position.y,(rootObject.transform.position.z-cam.transform.position.z)));
+        if (Input.touchCount == 6 && Input.GetTouch(5).phase == TouchPhase.Ended) {
+            pointB = cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(5).position.x,Input.GetTouch(5).position.y,(rootObject.transform.position.z-cam.transform.position.z)));
             // pointB = cam.ScreenToWorldPoint(mouse);
             CreateSlicePlane();
             cutRender.positionCount = 2;
