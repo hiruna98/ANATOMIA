@@ -61,6 +61,12 @@ public class MainMenuController : MonoBehaviour
             yield return null;
         }
     }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
+        Debug.Log("Application Closed");
+    }
 }
 
 
