@@ -15,9 +15,13 @@ public class AccessibilityBtnController : MonoBehaviour
     private Button viewBtn;
     private Button functionBtn;
 
+    private MultiSelectStore multiSelectStore;
+    private MaterialController materialController;
+
     void Awake()
     {
-
+        multiSelectStore = MultiSelectStore.Instance;
+        materialController = MaterialController.Instance;
         accessibilityBtn = GameObject.Find("Accessibility Btn");
         radialMenu = GameObject.Find("Radial Menu");
         viewModal = GameObject.Find("View Modal");
@@ -116,6 +120,8 @@ public class AccessibilityBtnController : MonoBehaviour
 
     public void handleInfoModelClose()
     {
+        materialController.removeMaterialOfAllObjects();
         infoModel.SetActive(false);
+        multiSelectStore.removeAllObject();
     }
 }

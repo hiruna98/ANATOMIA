@@ -72,8 +72,6 @@ public class TouchController : MonoBehaviour
         materialController = MaterialController.Instance;
         viewController = ViewController.Instance;
         viewController.initializeRotation(root);
-        // viewPopup = GameObject.Find("View Popup");
-        // viewPopup.SetActive(false);
         PlayerPrefs.SetFloat("defaultScale",root.transform.localScale.x);
         PlayerPrefs.Save();
     }
@@ -102,7 +100,11 @@ public class TouchController : MonoBehaviour
                         timeLastPress = Time.time;
                         if ((timeLastPress - timePressed) > timeDelayThreshold && touch.tapCount == 1)
                         {
-                            multisilectEnable = true;   //If loag press enable multiple selection option
+                            Ray ray = cam.ScreenPointToRay(touch.position);
+                            RaycastHit hit;
+                            if (Physics.Raycast(ray, out hit)){
+                                multisilectEnable = true;   //If loag press enable multiple selection option
+                            }
                             //Select touched object
                             SelectObject(touch);
                         }else if((timeLastPress - timePressed) < timeDelayThreshold && touch.tapCount == 1){
@@ -145,7 +147,7 @@ public class TouchController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             GameObject hitObject = hit.transform.gameObject;
-
+            infoModel.SetActive(false);
             if (multiSelectStore.findObject(hitObject))
             {
                 //if touch already selected object un select it
@@ -171,7 +173,6 @@ public class TouchController : MonoBehaviour
                     // if multi select enabled and hit an object -> add it and its children to the multi select store and add selection material
                     multiSelectStore.addObject(hitObject);
                     materialController.addMaterial(hitObject,selectionMat);
-                    //infoModel.SetActive(false);
                     if (SelectionMode == SelMode.AndChildren)
                     {
                         List<GameObject> childrenRenderers = new List<GameObject>();
@@ -200,9 +201,9 @@ public class TouchController : MonoBehaviour
                         materialController.removeMaterialOfAllObjects();
                         multiSelectStore.addObject(hitObject);
                         materialController.addMaterial(hitObject,selectionMat);
-                        //infoModel.SetActive(true);
-                        // infoAnim.Play("IM_Open");
-                        // infoModel.transform.localScale = new Vector3(1,1,1);
+                        infoModel.SetActive(true);
+                        //infoAnim.Play("IM_Open");
+                        infoModel.transform.localScale = new Vector3(1,1,1);
                         if (SelectionMode == SelMode.AndChildren)
                         {
                             List<GameObject> childrenRenderers = new List<GameObject>();
@@ -227,15 +228,15 @@ public class TouchController : MonoBehaviour
             {
                 materialController.removeMaterialOfAllObjects();
                 multiSelectStore.removeAllObject();
-                //infoModel.SetActive(false);
+                infoModel.SetActive(false);
                 multisilectEnable = false;
             }
-            else
-            {
-                materialController.removeMaterialOfAllObjects();
-                //infoModel.SetActive(false);
-                multiSelectStore.removeAllObject();
-            }
+            // else
+            // {
+            //     materialController.removeMaterialOfAllObjects();
+            //     // infoModel.SetActive(false);
+            //     multiSelectStore.removeAllObject();
+            // }
         }
     }
 
