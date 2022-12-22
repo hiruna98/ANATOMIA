@@ -1198,9 +1198,9 @@ RectTransform:
   m_Father: {fileID: 5614620400845124609}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324.34, y: -50.953552}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.34, y: 88.3317}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &927577999606937267
@@ -1218,9 +1218,9 @@ RectTransform:
   m_Father: {fileID: 5614620400904598034}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324.34, y: -50.953552}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.34, y: 88.3317}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &927578000511795871
@@ -1238,9 +1238,9 @@ RectTransform:
   m_Father: {fileID: 5614620399643166270}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324.34, y: -50.953552}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.34, y: 88.3317}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &1205829183947052660
@@ -3344,7 +3344,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1685515597}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: handleCardClick
         m_Mode: 5
@@ -3353,7 +3353,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: heart
+          m_StringArgument: head
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &3941011372604874349
@@ -3412,9 +3412,9 @@ RectTransform:
   m_Father: {fileID: 364250291129892193}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.17026, y: -25.1194}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.3405, y: 30.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4214503045301327012
@@ -3696,9 +3696,9 @@ RectTransform:
   m_Father: {fileID: 364250291129892193}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324.34, y: -50.953552}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.34, y: 88.3317}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &5374102218326693294
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Brain
+  m_text: Head
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5036,7 +5036,7 @@ GameObject:
   - component: {fileID: 8060051394066372565}
   - component: {fileID: 3853149505408518023}
   m_Layer: 5
-  m_Name: Brain
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5143,7 +5143,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Brain is a organ that controls thought, memory, touch and many more.
+  m_text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5405,9 +5407,9 @@ RectTransform:
   m_Father: {fileID: 5614620400845124609}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.17026, y: -25.1194}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.3405, y: 30.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8271658161102021901
@@ -5425,9 +5427,9 @@ RectTransform:
   m_Father: {fileID: 5614620400904598034}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.17026, y: -25.1194}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.3405, y: 30.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8271658161941942561
@@ -5445,9 +5447,9 @@ RectTransform:
   m_Father: {fileID: 5614620399643166270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 172.17026, y: -25.1194}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304.3405, y: 30.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8523032773591231974
