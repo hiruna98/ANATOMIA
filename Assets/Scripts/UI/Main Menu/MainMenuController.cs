@@ -44,9 +44,10 @@ public class MainMenuController : MonoBehaviour
             SceneManager.LoadScene((int)SceneIndexes.MODEL_SCENE);
         }else if(name == "skull"){
             SceneManager.LoadScene((int)SceneIndexes.CROSS_SECTION_SCENE);
+        } else if(name == "head"){
+            SceneManager.LoadScene((int)SceneIndexes.HEAD_SCENE);
         }
-
-        LoadingScreen.gameObject.SetActive(false);
+ 
         LoadingScreen.gameObject.SetActive(false);
     }
 
