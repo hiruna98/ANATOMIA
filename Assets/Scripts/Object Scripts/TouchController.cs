@@ -49,13 +49,8 @@ public class TouchController : MonoBehaviour
 
     //to capture double tap
     private int tapCount = 0;
-    public float doubleTapDelayThershold = 0.5f;
 
-    public Vector2 forfingerTapAreaThreashold = new Vector2(1.0f,1.0f);
-    private float firstTapTime = 0.0f;
-    private float secondTimeTap = 0.0f;
-
-    private GameObject viewPopup;
+    private DataStore dataStore;
 
 
     void OnEnable()
@@ -70,6 +65,7 @@ public class TouchController : MonoBehaviour
         multiSelectStore = MultiSelectStore.Instance;
         allGameObjects.AddRange(GameObject.FindGameObjectsWithTag("Object"));
         materialController = MaterialController.Instance;
+        dataStore = DataStore.Instance;
         viewController = ViewController.Instance;
         viewController.initializeRotation(root);
         PlayerPrefs.SetFloat("defaultScale",root.transform.localScale.x);
@@ -129,8 +125,10 @@ public class TouchController : MonoBehaviour
 
                 if(touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended && touch3.phase == TouchPhase.Ended && touch4.phase == TouchPhase.Ended && touch0.tapCount == 1 && touch1.tapCount == 1 && touch2.tapCount == 1 && touch3.tapCount == 1 && touch4.tapCount == 1)
                 {
-                    GameObject slicedObj = GameObject.Find("slicedObjects");
-                    Destroy(slicedObj);
+                    GameObject slicedObjLeft = GameObject.Find("slicedParentLeft");
+                    GameObject slicedObjRight = GameObject.Find("slicedParentRight");
+                    Destroy(slicedObjLeft);
+                    Destroy(slicedObjRight);
                     root.SetActive(true);
                 }
             }
@@ -188,13 +186,9 @@ public class TouchController : MonoBehaviour
                 }
                 else
                 {
-                    int crossSectionEnable = PlayerPrefs.GetInt("crossSectionEnable");
-                    int crossSectionSelection = PlayerPrefs.GetInt("crossSectionSelection");
-                    Debug.Log(crossSectionEnable);
-                    if(crossSectionSelection == 1){
-                        hitObject.SetActive(false);
-                        PlayerPrefs.SetInt("crossSectionSelection",0);
-                        PlayerPrefs.Save();
+                    if(dataStore.getCrossSectionSelection() == true){
+                        hitObject.transform.parent.gameObject.SetActive(false);
+                        dataStore.setCrossSectionSelection(false);
                     }else{
                         // if multiselect not enabled remove all selected objects from list and add newly touched object
                         multiSelectStore.removeAllObject();

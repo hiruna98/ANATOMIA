@@ -20915,8 +20915,6 @@ MonoBehaviour:
   tapThreshold: 2
   root: {fileID: 1532657627069721322}
   infoModel: {fileID: 1534516708}
-  doubleTapDelayThershold: 0.5
-  forfingerTapAreaThreashold: {x: 1, y: 1}
 --- !u!4 &4562127349385003193
 Transform:
   m_ObjectHideFlags: 0
@@ -37261,7 +37259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 0.05
-  _camera: {fileID: 0}
+  _camera: {fileID: 4562127349385003198}
 --- !u!114 &7569347985610803731
 MonoBehaviour:
   m_ObjectHideFlags: 0

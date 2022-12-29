@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using Lean.Touch;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class DrawCut : MonoBehaviour
 {
@@ -13,6 +17,8 @@ public class DrawCut : MonoBehaviour
 
     private GameObject rootObject;
 
+    private GameObject rotationPoint;
+
     Camera cam;
 
     void Start() {
@@ -21,6 +27,7 @@ public class DrawCut : MonoBehaviour
         cutRender.startWidth = .05f;
         cutRender.endWidth = .05f;
         rootObject = GameObject.Find("root_object");
+        rotationPoint = GameObject.Find("Rotation Point");
     }
 
     void Update()
@@ -95,14 +102,69 @@ public class DrawCut : MonoBehaviour
     {
         Vector3 pointInPlane = (pointA + pointB) / 2;
         
+        GameObject slicedParent1 = GameObject.Find("slicedParentLeft");
+        GameObject slicedParent2 = GameObject.Find("slicedParentRight");
+
         Vector3 cutPlaneNormal = Vector3.Cross((pointA-pointB),(pointA-cam.transform.position)).normalized;
         Quaternion orientation = Quaternion.FromToRotation(Vector3.up, cutPlaneNormal);
         //boxVis.rotation = orientation;
        // boxVis.localScale = new Vector3(10, 0.25f, 10);
        // boxVis.position = pointInPlane;
 
-        
+        List<GameObject> allGameObjects = new List<GameObject>();
+        foreach (Transform child in rootObject.transform)  
+        {  
+            if(child.childCount>0){
+                foreach (Transform grandChild in child)   
+                    allGameObjects.Add(grandChild.gameObject); 
+            }else{
+                allGameObjects.Add(child.gameObject); 
+            }
+        }
+
         var all = Physics.OverlapBox(pointInPlane, new Vector3(100, 0.01f, 100), orientation);
+        if(all.Length > 0)
+        {
+
+            if(!slicedParent1)
+            {
+                slicedParent1 = new GameObject();
+                slicedParent1.transform.position = rootObject.transform.position;
+                slicedParent1.transform.rotation = rootObject.transform.rotation;
+                slicedParent1.transform.localScale = rootObject.transform.localScale;
+                slicedParent1.name = "slicedParentLeft";
+                slicedParent1.AddComponent<LeanDragTranslate>().Use.RequiredFingerCount = 5;
+                slicedParent1.AddComponent<PinchScale>().sensitivity = 0.05f;
+
+                GameObject rotationPointLeft = new GameObject();
+                rotationPointLeft.transform.position = rotationPoint.transform.position;
+                rotationPointLeft.transform.rotation = rotationPoint.transform.rotation;
+                rotationPointLeft.transform.localScale = rotationPoint.transform.localScale;
+                rotationPointLeft.name = "Rotation Point Left";
+                rotationPointLeft.transform.SetParent(slicedParent1.transform);
+                slicedParent1.AddComponent<RotateAround>().rotatePoint = rotationPointLeft;
+
+            }
+
+            if(!slicedParent2)
+            {
+                slicedParent2 = new GameObject();
+                slicedParent2.transform.position = rootObject.transform.position;
+                slicedParent2.transform.rotation = rootObject.transform.rotation;
+                slicedParent2.transform.localScale = rootObject.transform.localScale;
+                slicedParent2.name = "slicedParentRight";
+                slicedParent2.AddComponent<LeanDragTranslate>().Use.RequiredFingerCount = 5;
+                slicedParent2.AddComponent<PinchScale>().sensitivity = 0.05f;
+
+                GameObject rotationPointRight = new GameObject();
+                rotationPointRight.transform.position = rotationPoint.transform.position;
+                rotationPointRight.transform.rotation = rotationPoint.transform.rotation;
+                rotationPointRight.transform.localScale = rotationPoint.transform.localScale;
+                rotationPointRight.name = "Rotation Point Left";
+                rotationPointRight.transform.SetParent(slicedParent1.transform);
+                slicedParent2.AddComponent<RotateAround>().rotatePoint = rotationPointRight;
+            }
+        }
         
         //Ray ray = new Ray(pointA, (pointB - pointA).normalized);
         //var all = Physics.RaycastAll(ray);
@@ -110,10 +172,23 @@ public class DrawCut : MonoBehaviour
             foreach (var hit in all)
             {
                 MeshFilter filter = hit.gameObject.GetComponentInChildren<MeshFilter>();
+                allGameObjects.Remove(hit.gameObject);
                 if(filter != null)
-                    Cutter.Cut(hit.gameObject, pointInPlane, cutPlaneNormal, rootObject.transform);
+                    Cutter.Cut(hit.gameObject, pointInPlane, cutPlaneNormal, rootObject.transform.localScale);
             }
         }
+        Plane cutPlane = new Plane(rootObject.transform.InverseTransformDirection(-cutPlaneNormal), rootObject.transform.InverseTransformPoint(pointInPlane));
+
+        foreach(GameObject obj in allGameObjects){
+            bool objRighttSide = cutPlane.GetSide(obj.transform.position);
+            if(objRighttSide){
+                obj.transform.SetParent(slicedParent2.transform);
+            }else{
+                obj.transform.SetParent(slicedParent1.transform);
+            }
+        }
+
+        rootObject.SetActive(false);
         
     }
 }
