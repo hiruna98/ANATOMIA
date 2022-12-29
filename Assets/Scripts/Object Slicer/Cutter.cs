@@ -8,7 +8,7 @@ public class Cutter : MonoBehaviour
     private static Mesh originalMesh;
 
 
-    public static void Cut(GameObject originalGameObject, Vector3 contactPoint, Vector3 cutNormal, Transform rootTransform)
+   public static void Cut(GameObject originalGameObject, Vector3 contactPoint, Vector3 cutNormal, Vector3 rootScale)
     {
         if(isBusy)
             return;
@@ -18,11 +18,9 @@ public class Cutter : MonoBehaviour
         GameObject cutobject = new GameObject();
         cutobject.transform.position = originalGameObject.transform.position;
         cutobject.transform.rotation = originalGameObject.transform.rotation;
-        cutobject.transform.localScale = originalGameObject.transform.localScale;
-        Debug.Log(originalGameObject.transform.localScale);
+        cutobject.transform.localScale = rootScale;
         cutobject.AddComponent<MeshRenderer>().materials = originalGameObject.GetComponent<Renderer>().materials;
         cutobject.AddComponent<MeshFilter>().mesh = originalGameObject.GetComponent<MeshFilter>().mesh;
-        originalGameObject.SetActive(false);
 
         Plane cutPlane = new Plane(cutobject.transform.InverseTransformDirection(-cutNormal), cutobject.transform.InverseTransformPoint(contactPoint));
         originalMesh = cutobject.GetComponent<MeshFilter>().mesh;
@@ -45,7 +43,7 @@ public class Cutter : MonoBehaviour
 
         //Getting and destroying all original colliders to prevent having multiple colliders
         //of different kinds on one object
-        var originalCols = cutobject.GetComponents<Collider>();
+        var originalCols = originalGameObject.GetComponents<Collider>();
         foreach (var col in originalCols)
             Destroy(col);
 
@@ -62,9 +60,9 @@ public class Cutter : MonoBehaviour
         cutobject.GetComponent<MeshRenderer>().materials = mats;
 
         GameObject right = new GameObject();
-        right.transform.position = cutobject.transform.position + (Vector3.up * .05f);
-        right.transform.rotation = cutobject.transform.rotation;
-        right.transform.localScale = cutobject.transform.localScale;
+        right.transform.position = originalGameObject.transform.position + (Vector3.up * .05f);
+        right.transform.rotation = originalGameObject.transform.rotation;
+        right.transform.localScale = rootScale;
         right.AddComponent<MeshRenderer>();
         
         mats = new Material[finishedRightMesh.subMeshCount];
@@ -82,39 +80,38 @@ public class Cutter : MonoBehaviour
             col.convex = true;
         }
         
-        right.name = "Obj1";
-        cutobject.name = "Obj2";
+        right.name = originalGameObject.name+"Right";
+        cutobject.name = originalGameObject.name+"Left";
         right.tag = "Object";
         cutobject.tag = "Object";
 
-
-        right.AddComponent<LeanDragTranslate>().Use.RequiredFingerCount = 3;
-        cutobject.AddComponent<LeanDragTranslate>().Use.RequiredFingerCount = 3;
-        right.AddComponent<RotateObject>();
-        cutobject.AddComponent<RotateObject>();
-        right.AddComponent<LeanPinchScale>().Use.RequiredFingerCount = 2;
-        cutobject.AddComponent<LeanPinchScale>().Use.RequiredFingerCount = 2;
-
         MaterialController materialController = MaterialController.Instance;
         materialController.setDefaultMaterials(cutobject);
-        materialController.setDefaultMaterials(right);        
+        materialController.setDefaultMaterials(right);   
 
-        
-        GameObject parent = GameObject.Find("slicedObjects");
-        if(parent){
-            right.transform.SetParent(parent.transform);
-            cutobject.transform.SetParent(parent.transform);
+        GameObject parent1 = GameObject.Find("slicedParentLeft");
+        GameObject parent2 = GameObject.Find("slicedParentRight");
+        if(parent1){
+            right.transform.SetParent(parent2.transform);
+            cutobject.transform.SetParent(parent1.transform);
         }else{
-            parent = new GameObject();
-            parent.transform.position = cutobject.transform.position;
-            parent.name = "slicedObjects";
+            GameObject slicedParent1 = new GameObject();
+            slicedParent1.transform.position = cutobject.transform.position;
+            slicedParent1.transform.rotation = cutobject.transform.rotation;
+            slicedParent1.transform.localScale = rootScale;
+            slicedParent1.name = "slicedParentLeft";
 
-            right.transform.SetParent(parent.transform);
-            cutobject.transform.SetParent(parent.transform);
+            GameObject slicedParent2 = new GameObject();
+            slicedParent2.transform.position = cutobject.transform.position+ (Vector3.up * .05f);
+            slicedParent2.transform.rotation = cutobject.transform.rotation;
+            slicedParent2.transform.localScale = rootScale;
+            slicedParent2.name = "slicedParentRight";
+
+            right.transform.SetParent(slicedParent2.transform);
+            cutobject.transform.SetParent(slicedParent1.transform);
         }
-        
-        PlayerPrefs.SetInt("crossSectionSelection",1);
-        PlayerPrefs.Save();
+
+        DataStore.Instance.setCrossSectionSelection(true);
         //var rightRigidbody = right.AddComponent<Rigidbody>();
         //rightRigidbody.AddRelativeForce(-cutPlane.normal * 250f);
         

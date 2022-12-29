@@ -12,6 +12,8 @@ public class DataStore
     private Realm realm;
     private DataModel dataModel;
 
+    private bool crossSectionSelection = false;
+
   private DataStore()
     {
        realm = Realm.GetInstance();
@@ -28,6 +30,14 @@ public class DataStore
             }
             return instance;
         }
+    }
+
+    public bool getCrossSectionSelection(){
+        return crossSectionSelection;
+    }
+
+    public void setCrossSectionSelection(bool value){
+        crossSectionSelection = value;
     }
 
     public DataModel FindOrgan(string name){
