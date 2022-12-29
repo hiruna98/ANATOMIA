@@ -68,8 +68,7 @@ public class TouchController : MonoBehaviour
         dataStore = DataStore.Instance;
         viewController = ViewController.Instance;
         viewController.initializeRotation(root);
-        PlayerPrefs.SetFloat("defaultScale",root.transform.localScale.x);
-        PlayerPrefs.Save();
+        Debug.Log(root.transform.rotation.eulerAngles);
     }
 
     private void Awake()

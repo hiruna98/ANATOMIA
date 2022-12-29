@@ -7,6 +7,7 @@ TagManager:
   - Object
   - popup
   - Btn
+  - Rotation Point
   layers:
   - Default
   - TransparentFX

@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 656201197}
   m_Layer: 0
   m_Name: Rotation Point
-  m_TagString: Untagged
+  m_TagString: Rotation Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8229,7 +8229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4251328729032159229}
-  m_LocalRotation: {x: -0.016677853, y: -0.7069101, z: -0.7069101, w: 0.016677853}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0.3, y: -63, z: 0}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_ConstrainProportionsScale: 0
@@ -8239,7 +8239,7 @@ Transform:
   - {fileID: 656201197}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -177.297}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!114 &5093974605189730055
 MonoBehaviour:
   m_ObjectHideFlags: 0
