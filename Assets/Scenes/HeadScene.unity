@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 1007127224}
   m_Layer: 0
   m_Name: RotationPoint
-  m_TagString: Untagged
+  m_TagString: Rotation Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
