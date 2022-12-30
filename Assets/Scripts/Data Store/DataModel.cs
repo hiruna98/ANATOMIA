@@ -1,25 +1,23 @@
-using Realms;
-using MongoDB.Bson;
 
-public class DataModel : RealmObject
+public class DataModel
 {
-    [PrimaryKey]
-    [MapTo("id")]
-      public ObjectId Id { get; set; } = ObjectId.GenerateNewId(); 
-    [MapTo("name")]
-    [Required]
-   public string Name { get; set; }
-   [MapTo("description")]
-    [Required]
-   public string Description { get; set; }
+    public string _id { get; set; }
+    public string name { get; set; }
+    public string description { get; set; }
+    public string layer { get; set; }
+    public string organImage { get; set; }
 
-   public DataModel(){
+    public DataModel()
+    {
 
-   }
+    }
 
-   public DataModel (string Name, string Description){
-    this.Id=ObjectId.GenerateNewId();
-    this.Name = Name;
-    this.Description = Description;
-   }
+    public DataModel(string _id, string name, string description, string layer, string organImage)
+    {
+        this._id = _id;
+        this.name = name;
+        this.description = description;
+        this.layer = layer;
+        this.organImage = organImage;
+    }
 }
