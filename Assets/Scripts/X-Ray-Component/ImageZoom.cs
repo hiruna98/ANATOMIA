@@ -16,7 +16,7 @@ public class ImageZoom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        if (Input.touchCount == 1) {
+        if (Input.touchCount == 2) {
             _isDragging = true;
 
         }

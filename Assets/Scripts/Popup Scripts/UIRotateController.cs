@@ -5,10 +5,10 @@ using UnityEngine;
 public class UIRotateController
 {
 
-    private float upperY = 10f;
-    private float lowerY = -10f;
-    private float leftX = -46f;
-    private float rightX = 44f;
+    private float upperY = 20f;
+    private float lowerY = -20f;
+    private float leftX = -66f;
+    private float rightX = 64f;
 
     private UIRotateController()
     {

@@ -9,6 +9,8 @@ public class ButtonEventHandler : MonoBehaviour
     private GameObject obj; 
 
     private MultiSelectStore multiSelectStore;
+
+    private MaterialController materialController;
     private IsolationController isolationController;
     private ViewController viewController;
 
@@ -20,10 +22,13 @@ public class ButtonEventHandler : MonoBehaviour
     private GameObject infoPopupLockBtn;
     private GameObject infoPopupUnlockBtn;
 
+    public GameObject infoModel;
+
     private void Start()
     {
         obj = GameObject.Find("root_object");
         multiSelectStore = MultiSelectStore.Instance;
+        materialController = MaterialController.Instance;
         viewController = ViewController.Instance;
         isolationController = new IsolationController();
         viewPopupLockBtn   = GameObject.Find("View Modal/Top Bar/Lock Btn");
@@ -36,6 +41,15 @@ public class ButtonEventHandler : MonoBehaviour
     public void onIsolateBtnClick()
     {
         isolationController.IsolateObjects(multiSelectStore.getSelectedObjects());
+        materialController.removeMaterialOfAllObjects();
+        infoModel.SetActive(false);
+    }
+
+    public void onHideBntClick()
+    {
+        isolationController.HideObjects(multiSelectStore.getSelectedObjects());
+        materialController.removeMaterialOfAllObjects();
+        infoModel.SetActive(false);
     }
 
     public void onUndoBtnClick()

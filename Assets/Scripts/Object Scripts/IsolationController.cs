@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IsolationController
 {
+
     private List<GameObject> allGameObjects = new List<GameObject>();
     private Stack<GameObject> undoStack = new Stack<GameObject>();
     private Stack<GameObject> redoStack = new Stack<GameObject>();
@@ -24,6 +25,7 @@ public class IsolationController
         {
             allGameObjects.ForEach(obj =>
             {
+
                 if (!selectedObjects.Contains(obj) && !undoStack.Contains(obj))
                 {
                     unSelected.Add(obj);
@@ -42,6 +44,23 @@ public class IsolationController
             });
 
             //clear redoStack ans redoSequance for each new action
+            redoStack.Clear();
+            redoSequance.Clear();
+        }
+        unSelected.Clear();
+    }
+
+    public void HideObjects(List<GameObject> selectedObjects)
+    {
+        if (selectedObjects.Count > 0)
+        {
+            undoSequance.Push(selectedObjects.Count);
+
+            selectedObjects.ForEach(obj =>
+            {
+                undoStack.Push(obj);
+                obj.SetActive(false);
+            });
             redoStack.Clear();
             redoSequance.Clear();
         }

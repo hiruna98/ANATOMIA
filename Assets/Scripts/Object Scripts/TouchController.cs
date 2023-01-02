@@ -52,6 +52,12 @@ public class TouchController : MonoBehaviour
 
     private DataStore dataStore;
 
+    public float doubleTapDelayThershold = 0.5f;
+    private float firstTapTime = 0.0f;
+    private float secondTimeTap = 0.0f;
+
+    public float singleTapMoveThreshold = 10f;
+
 
     void OnEnable()
     {
@@ -80,6 +86,7 @@ public class TouchController : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
+            /*
             if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
@@ -112,6 +119,48 @@ public class TouchController : MonoBehaviour
                         break;
                 }
                 
+                
+            }*/
+             if (Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
+                
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        startPos = touch.position;
+                        timePressed = Time.time;
+                        break;
+                    case TouchPhase.Ended:
+                        endPos = touch.position;
+                        timeLastPress = Time.time;
+                        float difX = Math.Abs(endPos.x - startPos.x);
+                        float difY = Math.Abs(endPos.y - startPos.y);
+
+                        if (difX <= singleTapMoveThreshold && difY <= singleTapMoveThreshold)
+                        {
+                            tapCount++;
+                            if(tapCount == 1){
+                                firstTapTime = Time.time;
+                            }else if(tapCount >=2){
+                                secondTimeTap = Time.time;
+                                if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold){
+                                    tapCount = 0;
+                                    viewController.antRotation(root);
+                                }else{
+                                    tapCount = 1;
+                                    firstTapTime = secondTimeTap;
+                                }
+                            }
+                            if ((timeLastPress - timePressed) > timeDelayThreshold)
+                            {
+                                multisilectEnable = true;   //If loag press enable multiple selection option
+                            }
+                            //Select touched object
+                            SelectObject(touch);
+                        }
+                        break;
+                }
                 
             }
             if(Input.touchCount == 5)
