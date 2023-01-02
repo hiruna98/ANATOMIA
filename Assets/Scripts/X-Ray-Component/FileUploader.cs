@@ -11,7 +11,9 @@ public class FileUploader : MonoBehaviour
     public RawImage rawImage;
 
     public void OpenFileBrowser(){
+        #if UNITY_EDITOR
         path = EditorUtility.OpenFilePanel("Overwrite with png","","png");
+        #endif
         GetImage();
     }
 
