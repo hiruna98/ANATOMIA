@@ -4427,7 +4427,7 @@ GameObject:
   - component: {fileID: 5282454679029602947}
   - component: {fileID: 5282454679029602948}
   m_Layer: 0
-  m_Name: Skin
+  m_Name: Skin001
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
