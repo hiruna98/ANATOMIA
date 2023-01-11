@@ -19,7 +19,7 @@ public class UiRotation : MonoBehaviour
         {
             if (touch.phase == TouchPhase.Moved)
             {
-                if (Input.touches.Length == 3)
+                if (Input.touches.Length == 2)
                 {
                     // Calculate the rotation angle using the DeltaPosition vectors
                     float angle = Mathf.Atan2(touch.deltaPosition.y, touch.deltaPosition.x) * Mathf.Rad2Deg;

@@ -30,7 +30,7 @@ public class ImageZoom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void Update() {
         if (_isDragging) {
-            if (Input.touchCount == 2) {
+            if (Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved) {
                 transform.localScale = new Vector2(_currentScale, _currentScale);
                 float distance = Vector3.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
                 if (_temp > distance) {

@@ -30,7 +30,7 @@ public class UIDragController : MonoBehaviour
 
             transform.position = canvas.transform.TransformPoint(position.x ,position.y,0);
         }
-        
+
         //uIRotateController.Rotate(transform);
     }
 
