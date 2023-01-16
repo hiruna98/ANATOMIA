@@ -42,14 +42,19 @@ public class ViewController
         defaultCamPosition = _camera.transform.localPosition;
     }
 
+    // public void antRotation(GameObject obj)
+    // {
+    //     GameObject rotatePoint = GameObject.FindWithTag("Rotation Point");
+
+    //     obj.transform.RotateAround(rotatePoint.transform.position,Vector3.down,obj.transform.rotation.eulerAngles.y - defaultRotation.y);
+    //     obj.transform.RotateAround(rotatePoint.transform.position,Vector3.right,obj.transform.rotation.eulerAngles.x - defaultRotation.x);
+    //     obj.transform.RotateAround(rotatePoint.transform.position,Vector3.down,obj.transform.rotation.eulerAngles.y - defaultRotation.y);
+    //     obj.transform.RotateAround(rotatePoint.transform.position,Vector3.right,obj.transform.rotation.eulerAngles.x - defaultRotation.x);
+    // }
+
     public void antRotation(GameObject obj)
     {
-        GameObject rotatePoint = GameObject.FindWithTag("Rotation Point");
-
-        obj.transform.RotateAround(rotatePoint.transform.position,Vector3.down,obj.transform.rotation.eulerAngles.y - defaultRotation.y);
-        obj.transform.RotateAround(rotatePoint.transform.position,Vector3.right,obj.transform.rotation.eulerAngles.x - defaultRotation.x);
-        obj.transform.RotateAround(rotatePoint.transform.position,Vector3.down,obj.transform.rotation.eulerAngles.y - defaultRotation.y);
-        obj.transform.RotateAround(rotatePoint.transform.position,Vector3.right,obj.transform.rotation.eulerAngles.x - defaultRotation.x);
+        obj.transform.rotation = Quaternion.Euler(0,0,0);  
     }
 
     public void posRotation(GameObject obj)

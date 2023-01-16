@@ -243,9 +243,9 @@ public class TouchController : MonoBehaviour
                         materialController.removeMaterialOfAllObjects();
                         multiSelectStore.addObject(hitObject);
                         materialController.addMaterial(hitObject,selectionMat);
-                        infoModel.SetActive(true);
+                        //infoModel.SetActive(true);
                         //infoAnim.Play("IM_Open");
-                        infoModel.transform.localScale = new Vector3(1,1,1);
+                        //infoModel.transform.localScale = new Vector3(1,1,1);
                         if (SelectionMode == SelMode.AndChildren)
                         {
                             List<GameObject> childrenRenderers = new List<GameObject>();
@@ -273,12 +273,12 @@ public class TouchController : MonoBehaviour
                 infoModel.SetActive(false);
                 multisilectEnable = false;
             }
-            // else
-            // {
-            //     materialController.removeMaterialOfAllObjects();
-            //     // infoModel.SetActive(false);
-            //     multiSelectStore.removeAllObject();
-            // }
+            else
+            {
+                materialController.removeMaterialOfAllObjects();
+                // infoModel.SetActive(false);
+                multiSelectStore.removeAllObject();
+            }
         }
     }
 

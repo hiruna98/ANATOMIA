@@ -29243,6 +29243,7 @@ GameObject:
   - component: {fileID: 6357302368020002672}
   - component: {fileID: 6357302368020002673}
   - component: {fileID: 6357302368020002674}
+  - component: {fileID: 6357302368020002675}
   m_Layer: 0
   m_Name: Functions Modal Container
   m_TagString: popup
@@ -29340,9 +29341,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6357302368020002659}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1641c60c3252d1a4781562358eb83388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6357302368020002675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357302368020002659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659bc45d3abab0247ac05f36d71bb27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &6357302368059086896
