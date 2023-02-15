@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HeadScene.unity
     guid: f22479c7be7865442bb792e2f0d7df87
+  - enabled: 1
+    path: Assets/Scenes/X-Ray-View.unity
+    guid: d5ff9ab4c218e4744900a5a27964e2f3
   m_configObjects: {}

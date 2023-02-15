@@ -46,6 +46,8 @@ public class MainMenuController : MonoBehaviour
             SceneManager.LoadScene((int)SceneIndexes.CROSS_SECTION_SCENE);
         } else if(name == "head"){
             SceneManager.LoadScene((int)SceneIndexes.HEAD_SCENE);
+        } else if(name == "xray"){
+            SceneManager.LoadScene((int)SceneIndexes.X_RAY_SCENE);
         }
  
         LoadingScreen.gameObject.SetActive(false);
