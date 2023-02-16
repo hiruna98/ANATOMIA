@@ -36,9 +36,9 @@ public class DetailLoad : MonoBehaviour
         // content = gameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         activeObject = multiSelectStore.getSelectedObjects()[0];
         DataModel organ = dataStore.FindOrgan(activeObject.name);
-        title.text = organ.name;
+        title.text = organ.displayName;
         textField.text = organ.description;
-        Debug.Log(organ.description);
+        Debug.Log(organ.displayName);
         if(organ.name != ""){
             StartCoroutine(DownloadImage(organ.organImage));
         }
