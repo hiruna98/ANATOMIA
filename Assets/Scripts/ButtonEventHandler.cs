@@ -24,6 +24,7 @@ public class ButtonEventHandler : MonoBehaviour
 
     public GameObject infoModel;
 
+
     private void Start()
     {
         obj = GameObject.Find("root_object");
@@ -132,4 +133,5 @@ public class ButtonEventHandler : MonoBehaviour
         infoPopupUnlockBtn.SetActive(false);
     }
 
+    
 }
