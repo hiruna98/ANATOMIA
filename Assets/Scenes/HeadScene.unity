@@ -449,6 +449,61 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180.2343, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &182781656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 182781658}
+  - component: {fileID: 182781657}
+  m_Layer: 0
+  m_Name: LayersController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &182781657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182781656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39b7cd7f87c5c24fa824260945f1386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layers:
+  - {fileID: 7251200040085802329}
+  - {fileID: 8527541353813978253}
+  - {fileID: 1133332224651973601}
+  - {fileID: 3592428916167034438}
+  - {fileID: 2815190565164946367}
+  - {fileID: 7369072711583956759}
+  - {fileID: 8280572179736185338}
+  - {fileID: 4377083105182181172}
+  - {fileID: 4062937328528639911}
+  - {fileID: 5020744865610852193}
+--- !u!4 &182781658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182781656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.0060608, y: -17.874172, z: 75.5627}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &369009523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,7 +2004,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Isolate
+  m_text: Add
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2578,9 +2633,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 377755384504215697}
-        m_TargetAssemblyTypeName: ButtonEventHandler, Assembly-CSharp
-        m_MethodName: onIsolateBtnClick
+      - m_Target: {fileID: 182781657}
+        m_TargetAssemblyTypeName: LayerContorller, Assembly-CSharp
+        m_MethodName: addLayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3081,9 +3136,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 377755384504215697}
-        m_TargetAssemblyTypeName: ButtonEventHandler, Assembly-CSharp
-        m_MethodName: onHideBntClick
+      - m_Target: {fileID: 182781657}
+        m_TargetAssemblyTypeName: LayerContorller, Assembly-CSharp
+        m_MethodName: removeLayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
