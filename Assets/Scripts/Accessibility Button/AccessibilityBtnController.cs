@@ -11,12 +11,17 @@ public class AccessibilityBtnController : MonoBehaviour
     private GameObject viewModal;
     private GameObject functionsModal;
     public GameObject infoModel;
+    public GameObject layersModel;
 
     private Button viewBtn;
     private Button functionBtn;
 
     private MultiSelectStore multiSelectStore;
     private MaterialController materialController;
+    
+    private GameObject layersPopupLockBtn;
+    private GameObject layersPopupUnlockBtn;
+    
 
     void Awake()
     {
@@ -30,12 +35,17 @@ public class AccessibilityBtnController : MonoBehaviour
 
         viewBtn = GameObject.Find("Radial Menu/Background/Elements/View/Button").GetComponent<Button>();
         functionBtn = GameObject.Find("Radial Menu/Background/Elements/Functions/Button").GetComponent<Button>();
+        layersPopupLockBtn = layersModel.transform.Find("Top Bar/Lock Btn").gameObject;
+        layersPopupUnlockBtn = layersModel.transform.Find("Top Bar/Unlock Btn").gameObject;
     }
     void Start()
     {
+        
+        // layersModel = GameObject.Find("Layers Modal");
         radialMenu.SetActive(false);
         viewModal.SetActive(false);
         functionsModal.SetActive(false);
+        // layersModel.SetActive(false);
     }
 
 
@@ -124,4 +134,30 @@ public class AccessibilityBtnController : MonoBehaviour
         infoModel.SetActive(false);
         multiSelectStore.removeAllObject();
     }
+
+    /*
+    * Layers model
+    */
+    public void handleLayersModelOpen()
+    {
+        layersModel.SetActive(true);
+    }
+
+    public void handleLayersModelClose()
+    {
+        layersModel.SetActive(false);
+    }
+
+    public void onLayersPopupLockRotation(){
+        PlayerPrefs.SetInt("Layers Model Container RotationLock",1);
+        layersPopupLockBtn.SetActive(false);
+        layersPopupUnlockBtn.SetActive(true);
+    }
+
+    public void onLayersPopupUnlockRotation(){
+        PlayerPrefs.SetInt("Layers Model Container RotationLock",0);
+        layersPopupLockBtn.SetActive(true);
+        layersPopupUnlockBtn.SetActive(false);
+    }
+
 }
