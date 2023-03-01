@@ -45,7 +45,7 @@ public class AccessibilityBtnController : MonoBehaviour
         radialMenu.SetActive(false);
         viewModal.SetActive(false);
         functionsModal.SetActive(false);
-        layersModel.SetActive(false);
+        // layersModel.SetActive(false);
     }
 
 
