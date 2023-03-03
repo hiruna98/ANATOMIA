@@ -8,6 +8,8 @@ TagManager:
   - popup
   - Btn
   - Rotation Point
+  - object
+  - clipping object
   layers:
   - Default
   - TransparentFX

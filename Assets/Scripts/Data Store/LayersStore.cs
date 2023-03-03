@@ -5,7 +5,8 @@ using UnityEngine;
 public class LayersStore
 {
     struct Layer {
-        public GameObject obj;
+        public GameObject originalObj;
+        public GameObject clippingObj;
 
         public bool isEnable;
 
@@ -39,38 +40,38 @@ public class LayersStore
         }
     }
 
-    public void initializeLayers(List<GameObject> list)
+    public void initializeLayers(List<GameObject> list, GameObject clippingRoot)
     {
         list.ForEach(obj => {
             Layer l = new Layer();
-            l.obj = obj;
+            l.originalObj = obj;
+            l.clippingObj = clippingRoot.transform.Find(obj.name).gameObject;
             l.isActive = obj.activeSelf;
             l.isEnable = true;
-            Debug.Log(obj.name);
             layers.Add(l);
         });
         activeLayers = list.Count;
         enableLayers = activeLayers;
-        Debug.Log("Initialized");
 
     }
 
     public void addLayer(){
         if(removedLayers.Count > 0){
             Layer l = removedLayers.Pop();
-            l.obj.SetActive(true);
+            l.originalObj.SetActive(true);
+            l.clippingObj.SetActive(true);
             l.isActive = true;
             activeLayers++;
         }
-        Debug.Log("Add");
     }
 
     public void removeLayer(){
         bool removedLayer = false;
         if(activeLayers >0){
             layers.ForEach(obj=>{
-                if(obj.obj.activeSelf == true && obj.isEnable==true && removedLayer == false){
-                    obj.obj.SetActive(false);
+                if(obj.originalObj.activeSelf == true && obj.isEnable==true && removedLayer == false){
+                    obj.originalObj.SetActive(false);
+                    obj.clippingObj.SetActive(false);
                     obj.isActive = false;
                     removedLayer = true;
                     activeLayers--;
@@ -78,6 +79,5 @@ public class LayersStore
                 }
             });
         }
-        Debug.Log("Remove" + activeLayers);
     }
 }

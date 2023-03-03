@@ -33,7 +33,7 @@ public class RotateAround : MonoBehaviour
                     case TouchPhase.Began:
                         if(Physics.Raycast(ray, out hit)){
                             GameObject hitObject = hit.transform.gameObject;
-                            if(hitObject.tag == "Object"){
+                            if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
                                 rotating = true;
                             }
                         }

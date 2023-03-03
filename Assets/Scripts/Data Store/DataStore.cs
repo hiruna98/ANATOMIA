@@ -13,9 +13,18 @@ public class DataStore
 
     private bool crossSectionSelection = false;
 
+    private bool isObjectCut = false;
+
+    private Vector3 cutPointA;
+    private Vector3 cutPointB;
+    private Vector3 cutPointC;
+
+
     private DataStore()
     {
-       
+       cutPointA = new Vector3(0,0,0);
+       cutPointB = new Vector3(0,0,0);
+       cutPointC = new Vector3(0,0,0);
     }
 
     private static DataStore instance = null;
@@ -39,6 +48,14 @@ public class DataStore
         crossSectionSelection = value;
     }
 
+    public bool getIsObjectCut(){
+        return isObjectCut;
+    }
+
+    public void setIsObjectCut(bool value){
+        isObjectCut = value;
+    }
+
     public DataModel FindOrgan(string name){
         try{
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("http://localhost:3000/organ/"+name));
@@ -58,6 +75,30 @@ public class DataStore
 
     public void WriteOrgan(string name){
         
+    }
+
+    public Vector3 getCutPointA(){
+        return cutPointA;
+    }
+
+    public void setCutPointA(Vector3 v){
+        this.cutPointA = v;
+    }
+
+    public Vector3 getCutPointB(){
+        return cutPointB;
+    }
+
+    public void setCutPointB(Vector3 v){
+        this.cutPointB = v;
+    }
+
+    public Vector3 getCutPointC(){
+        return cutPointC;
+    }
+
+    public void setCutPointC(Vector3 v){
+        this.cutPointC = v;
     }
 
 
