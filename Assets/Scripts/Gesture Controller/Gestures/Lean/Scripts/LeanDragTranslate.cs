@@ -89,27 +89,27 @@ namespace Lean.Touch
 
 				if(Physics.Raycast(ray1, out hit1)){
 					hitObject = hit1.transform.gameObject;
-					if(hitObject.tag == "Object"){
+					if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
 						drag();
 					}
 				}else if(Physics.Raycast(ray2, out hit2)){
 					hitObject = hit2.transform.gameObject;
-					if(hitObject.tag == "Object"){
+					if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
 						drag();
 					}
 				}else if(Physics.Raycast(ray3, out hit3)){
 					hitObject = hit3.transform.gameObject;
-					if(hitObject.tag == "Object"){
+					if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
 						drag();
 					}
 				}else if(Physics.Raycast(ray4, out hit4)){
 					hitObject = hit4.transform.gameObject;
-					if(hitObject.tag == "Object"){
+					if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
 						drag();
 					}
 				}else if(Physics.Raycast(ray5, out hit5)){
 					hitObject = hit5.transform.gameObject;
-					if(hitObject.tag == "Object"){
+					if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
 						drag();
 					}
 				}

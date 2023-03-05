@@ -42,8 +42,8 @@ public class TouchController : MonoBehaviour
 
     private ViewController viewController;
 
-    
-    private List<GameObject> allGameObjects = new List<GameObject>();
+
+    // private List<GameObject> allGameObjects = new List<GameObject>();
 
     private Camera cam;
 
@@ -58,6 +58,24 @@ public class TouchController : MonoBehaviour
 
     public float singleTapMoveThreshold = 10f;
 
+    private Plane plane;
+    private GameObject cutPlane;
+    private GameObject clippingObject;
+    private GameObject originalObject;
+
+    private Vector3 pointA;
+    private Vector3 pointB;
+    private Vector3 pointC;
+    private LineRenderer cutRender;
+
+    Vector3 touch0StartPos;
+    Vector3 touch1StartPos;
+    Vector3 touch2StartPos;
+
+    Vector3 touch0EndPos;
+    Vector3 touch1EndPos;
+    Vector3 touch2EndPos;
+
 
     void OnEnable()
     {
@@ -69,12 +87,15 @@ public class TouchController : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         multiSelectStore = MultiSelectStore.Instance;
-        allGameObjects.AddRange(GameObject.FindGameObjectsWithTag("Object"));
+        // allGameObjects.AddRange(GameObject.FindGameObjectsWithTag("object"));
         materialController = MaterialController.Instance;
         dataStore = DataStore.Instance;
         viewController = ViewController.Instance;
+        cutPlane = GameObject.Find("Clipping Plane");
         viewController.initializeRotation(root);
-        Debug.Log(root.transform.rotation.eulerAngles);
+        cutRender = GetComponent<LineRenderer>();
+        clippingObject = root.transform.Find("Clipping Object").gameObject;
+        originalObject = root.transform.Find("Original Object").gameObject;
     }
 
     private void Awake()
@@ -86,68 +107,37 @@ public class TouchController : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            /*
             if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
-                
-                switch (touch.phase)
-                {
-                    case TouchPhase.Began:
-                        startPos = touch.position;
-                        timePressed = Time.time;
-                        break;
-                    case TouchPhase.Ended:
-                        endPos = touch.position;
-                        timeLastPress = Time.time;
-                        if ((timeLastPress - timePressed) > timeDelayThreshold && touch.tapCount == 1)
-                        {
-                            Ray ray = cam.ScreenPointToRay(touch.position);
-                            RaycastHit hit;
-                            if (Physics.Raycast(ray, out hit)){
-                                multisilectEnable = true;   //If loag press enable multiple selection option
-                            }
-                            //Select touched object
-                            SelectObject(touch);
-                        }else if((timeLastPress - timePressed) < timeDelayThreshold && touch.tapCount == 1){
-                            SelectObject(touch);
-                        }
-                        if((timeLastPress - timePressed) < timeDelayThreshold && touch.tapCount == 2){
-                            viewController.antRotation(root);
-                        }
-                            
-                        break;
-                }
-                
-                
-            }*/
-             if (Input.touchCount == 1)
-            {
-                Touch touch = Input.GetTouch(0);
-                
-                switch (touch.phase)
-                {
-                    case TouchPhase.Began:
-                        startPos = touch.position;
-                        timePressed = Time.time;
-                        break;
-                    case TouchPhase.Ended:
-                        endPos = touch.position;
-                        timeLastPress = Time.time;
-                        float difX = Math.Abs(endPos.x - startPos.x);
-                        float difY = Math.Abs(endPos.y - startPos.y);
 
-                        if (difX <= singleTapMoveThreshold && difY <= singleTapMoveThreshold)
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        startPos = touch.position;
+                        timePressed = Time.time;
+                        break;
+                    case TouchPhase.Ended:
+                        endPos = touch.position;
+                        timeLastPress = Time.time;
+                        
+                        if (isBelowSingleTapMoveThreshold(startPos,endPos))
                         {
                             tapCount++;
-                            if(tapCount == 1){
+                            if (tapCount == 1)
+                            {
                                 firstTapTime = Time.time;
-                            }else if(tapCount >=2){
+                            }
+                            else if (tapCount >= 2)
+                            {
                                 secondTimeTap = Time.time;
-                                if((secondTimeTap - firstTapTime)<= doubleTapDelayThershold){
+                                if ((secondTimeTap - firstTapTime) <= doubleTapDelayThershold)
+                                {
                                     tapCount = 0;
                                     viewController.antRotation(root);
-                                }else{
+                                }
+                                else
+                                {
                                     tapCount = 1;
                                     firstTapTime = secondTimeTap;
                                 }
@@ -161,31 +151,51 @@ public class TouchController : MonoBehaviour
                         }
                         break;
                 }
-                
+
             }
-            if(Input.touchCount == 5)
+            if (Input.touchCount == 3)
             {
                 Touch touch0 = Input.GetTouch(0);
                 Touch touch1 = Input.GetTouch(1);
                 Touch touch2 = Input.GetTouch(2);
-                Touch touch3 = Input.GetTouch(3);
-                Touch touch4 = Input.GetTouch(4);
+                // Touch touch3 = Input.GetTouch(3);
+                // Touch touch4 = Input.GetTouch(4);
 
-                if(touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended && touch3.phase == TouchPhase.Ended && touch4.phase == TouchPhase.Ended && touch0.tapCount == 1 && touch1.tapCount == 1 && touch2.tapCount == 1 && touch3.tapCount == 1 && touch4.tapCount == 1)
+                
+
+                if (touch0.phase == TouchPhase.Began && touch1.phase == TouchPhase.Began && touch2.phase == TouchPhase.Began)
                 {
-                    GameObject slicedObjLeft = GameObject.Find("slicedParentLeft");
-                    GameObject slicedObjRight = GameObject.Find("slicedParentRight");
-                    Destroy(slicedObjLeft);
-                    Destroy(slicedObjRight);
-                    root.SetActive(true);
+                    touch0StartPos = touch0.position;
+                    touch1StartPos = touch1.position;
+                    touch2StartPos = touch2.position;
+
                 }
+                if (touch0.phase == TouchPhase.Ended && touch1.phase == TouchPhase.Ended && touch2.phase == TouchPhase.Ended)
+                {
+                    touch0EndPos = touch0.position;
+                    touch1EndPos = touch1.position;
+                    touch2EndPos = touch2.position;
+
+                    if(isBelowSingleTapMoveThreshold(touch0StartPos,touch0EndPos) && isBelowSingleTapMoveThreshold(touch1StartPos,touch1EndPos) && isBelowSingleTapMoveThreshold(touch2StartPos,touch2EndPos)){
+                        if (dataStore.getIsObjectCut())
+                        {
+                            cutPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
+                            cutPlane.transform.position = new Vector3(1, 1, 0);
+                            originalObject.SetActive(true);
+                            clippingObject.SetActive(false);
+                            dataStore.setIsObjectCut(false);
+                        }
+                                }
+
+                }
+
             }
 
         }
     }
 
 
-    
+
     public void SelectObject(Touch touch)
     {
         Ray ray = cam.ScreenPointToRay(touch.position);
@@ -194,77 +204,101 @@ public class TouchController : MonoBehaviour
         {
             GameObject hitObject = hit.transform.gameObject;
             infoModel.SetActive(false);
-            if (multiSelectStore.findObject(hitObject))
-            {
-                //if touch already selected object un select it
-                multiSelectStore.removeObject(hitObject);
-                materialController.removeMaterial(hitObject);
-                if (SelectionMode == SelMode.AndChildren)
+            if (dataStore.getCrossSectionSelection() == true)
+            {    
+                originalObject.SetActive(false);
+                clippingObject.SetActive(true);
+                pointC = cam.ScreenToWorldPoint(touch.position);
+                pointB = dataStore.getCutPointB();
+                pointA = dataStore.getCutPointA();
+                cutPlane.transform.position = new Vector3(0, (pointA.y + pointB.y) / 2, 0);
+                cutPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
+                cutPlane.transform.Rotate(0, 0, calculateAngle(), Space.Self);
+                cutRender.SetPosition(0, Vector3.Lerp(pointA, pointB, 1f));
+                if (isRightSide(pointC))
                 {
-                    List<GameObject> childrenRenderers = new List<GameObject>();
-                    foreach (Transform child in hit.transform){
-                        childrenRenderers.Add(child.gameObject);
-                    }
-                    childrenRenderers.ForEach(r =>
-                    {
-                        multiSelectStore.removeObject(r);
-                        materialController.removeMaterial(r);
-                    });
+                    cutPlane.transform.Rotate(0, 0, 180, Space.Self);
                 }
+                dataStore.setCrossSectionSelection(false);
+                dataStore.setIsObjectCut(true);
             }
-            else
+            else if (multiSelectStore.findObject(hitObject))
             {
-                if (multisilectEnable)
+                if (!dataStore.getIsObjectCut())
                 {
-                    // if multi select enabled and hit an object -> add it and its children to the multi select store and add selection material
-                    multiSelectStore.addObject(hitObject);
-                    materialController.addMaterial(hitObject,selectionMat);
+                    //if touch already selected object un select it
+                    multiSelectStore.removeObject(hitObject);
+                    materialController.removeMaterial(hitObject);
                     if (SelectionMode == SelMode.AndChildren)
                     {
                         List<GameObject> childrenRenderers = new List<GameObject>();
-                        foreach (Transform child in hit.transform){
+                        foreach (Transform child in hit.transform)
+                        {
                             childrenRenderers.Add(child.gameObject);
                         }
                         childrenRenderers.ForEach(r =>
                         {
-                            multiSelectStore.addObject(r);
-                            materialController.addMaterial(r,selectionMat);
+                            multiSelectStore.removeObject(r);
+                            materialController.removeMaterial(r);
                         });
                     }
                 }
-                else
+            }
+            else
+            {
+                if (!dataStore.getIsObjectCut())
                 {
-                    if(dataStore.getCrossSectionSelection() == true){
-                        hitObject.transform.parent.gameObject.SetActive(false);
-                        dataStore.setCrossSectionSelection(false);
-                    }else{
-                        // if multiselect not enabled remove all selected objects from list and add newly touched object
-                        multiSelectStore.removeAllObject();
-                        materialController.removeMaterialOfAllObjects();
+                    if (multisilectEnable)
+                    {
+                        // if multi select enabled and hit an object -> add it and its children to the multi select store and add selection material
                         multiSelectStore.addObject(hitObject);
-                        materialController.addMaterial(hitObject,selectionMat);
-                        infoModel.SetActive(true);
-                        //infoAnim.Play("IM_Open");
-                        infoModel.transform.localScale = new Vector3(1,1,1);
+                        materialController.addMaterial(hitObject, selectionMat);
                         if (SelectionMode == SelMode.AndChildren)
                         {
                             List<GameObject> childrenRenderers = new List<GameObject>();
-                            foreach (Transform child in hit.transform){
+                            foreach (Transform child in hit.transform)
+                            {
                                 childrenRenderers.Add(child.gameObject);
                             }
                             childrenRenderers.ForEach(r =>
                             {
                                 multiSelectStore.addObject(r);
-                                materialController.addMaterial(r,selectionMat);
+                                materialController.addMaterial(r, selectionMat);
+                            });
+                        }
+                    }
+                    else
+                    {
+                        // if multiselect not enabled remove all selected objects from list and add newly touched object
+                        multiSelectStore.removeAllObject();
+                        materialController.removeMaterialOfAllObjects();
+                        multiSelectStore.addObject(hitObject);
+                        materialController.addMaterial(hitObject, selectionMat);
+                        infoModel.SetActive(true);
+                        //infoAnim.Play("IM_Open");
+                        infoModel.transform.localScale = new Vector3(1, 1, 1);
+                        if (SelectionMode == SelMode.AndChildren)
+                        {
+                            List<GameObject> childrenRenderers = new List<GameObject>();
+                            foreach (Transform child in hit.transform)
+                            {
+                                childrenRenderers.Add(child.gameObject);
+                            }
+                            childrenRenderers.ForEach(r =>
+                            {
+                                multiSelectStore.addObject(r);
+                                materialController.addMaterial(r, selectionMat);
                             });
                         }
                     }
                 }
+
             }
 
         }
         else
         {
+            
             // if hit outside un select all
             if (multisilectEnable)
             {
@@ -282,5 +316,35 @@ public class TouchController : MonoBehaviour
         }
     }
 
+    public float calculateAngle()
+    {
+        float angle = Mathf.Atan2(pointA.y - pointB.y, pointA.x - pointB.x) * 180 / Mathf.PI;
+        return angle;
+    }
+
+    public bool isRightSide(Vector3 position)
+    {
+        Vector3 pointInPlane = (pointA + pointB) / 2;
+
+        Vector3 cutPlaneNormal = Vector3.Cross((pointA - pointB), (pointA - cam.transform.position)).normalized;
+        Quaternion orientation = Quaternion.FromToRotation(Vector3.up, cutPlaneNormal);
+
+        Plane plane = new Plane(transform.up, cutPlane.transform.position);
+
+        bool pointRighttSide = plane.GetSide(position);
+
+        return pointRighttSide;
+    }
+
+    public bool isBelowSingleTapMoveThreshold(Vector3 startPosition , Vector3 endPosition){
+        float difX = Math.Abs(endPos.x - startPos.x);
+        float difY = Math.Abs(endPos.y - startPos.y);
+        if (difX <= singleTapMoveThreshold && difY <= singleTapMoveThreshold){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }
 
