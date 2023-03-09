@@ -10,6 +10,9 @@ TagManager:
   - Rotation Point
   - object
   - clipping object
+  - drawInstance
+  - UI Camera
+  - Draw
   layers:
   - Default
   - TransparentFX
@@ -46,4 +49,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI Layer
+    uniqueID: 3850506799
     locked: 0
