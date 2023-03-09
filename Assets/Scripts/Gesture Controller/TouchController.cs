@@ -206,8 +206,8 @@ public class TouchController : MonoBehaviour
             infoModel.SetActive(false);
             if (dataStore.getCrossSectionSelection() == true)
             {    
-                originalObject.SetActive(false);
-                clippingObject.SetActive(true);
+                // originalObject.SetActive(false);
+                // clippingObject.SetActive(true);
                 pointC = cam.ScreenToWorldPoint(touch.position);
                 pointB = dataStore.getCutPointB();
                 pointA = dataStore.getCutPointA();
@@ -215,10 +215,12 @@ public class TouchController : MonoBehaviour
                 cutPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
                 cutPlane.transform.Rotate(0, 0, calculateAngle(), Space.Self);
                 cutRender.SetPosition(0, Vector3.Lerp(pointA, pointB, 1f));
-                if (isRightSide(pointC))
+                if (isRightSide(pointC, hitObject))
                 {
                     cutPlane.transform.Rotate(0, 0, 180, Space.Self);
                 }
+                originalObject.SetActive(false);
+                clippingObject.SetActive(true);
                 dataStore.setCrossSectionSelection(false);
                 dataStore.setIsObjectCut(true);
             }
@@ -322,16 +324,19 @@ public class TouchController : MonoBehaviour
         return angle;
     }
 
-    public bool isRightSide(Vector3 position)
+    public bool isRightSide(Vector3 position, GameObject hitObj)
     {
         Vector3 pointInPlane = (pointA + pointB) / 2;
 
         Vector3 cutPlaneNormal = Vector3.Cross((pointA - pointB), (pointA - cam.transform.position)).normalized;
         Quaternion orientation = Quaternion.FromToRotation(Vector3.up, cutPlaneNormal);
 
-        Plane plane = new Plane(transform.up, cutPlane.transform.position);
+        Plane plane = new Plane(transform.up,pointInPlane);
+        // Plane plane = new Plane(root.transform.InverseTransformDirection(-cutPlaneNormal), root.transform.InverseTransformPoint(pointInPlane));
 
-        bool pointRighttSide = plane.GetSide(position);
+        bool pointRighttSide = plane.GetSide(hitObj.transform.position);
+
+        Debug.Log(pointRighttSide);
 
         return pointRighttSide;
     }

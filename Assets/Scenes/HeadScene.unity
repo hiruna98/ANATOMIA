@@ -5517,6 +5517,8 @@ GameObject:
   - component: {fileID: 369009527}
   - component: {fileID: 369009528}
   - component: {fileID: 369009530}
+  - component: {fileID: 369009532}
+  - component: {fileID: 369009531}
   m_Layer: 0
   m_Name: Layers Modal Container
   m_TagString: popup
@@ -5631,6 +5633,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &369009531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369009523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659bc45d3abab0247ac05f36d71bb27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &369009532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369009523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e4df7bf59dd44ea32168d74729205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 6357302368959458425}
 --- !u!1 &372696606
 GameObject:
   m_ObjectHideFlags: 0
@@ -64600,7 +64627,6 @@ GameObject:
   - component: {fileID: 6357302368020002671}
   - component: {fileID: 6357302368020002672}
   - component: {fileID: 6357302368020002673}
-  - component: {fileID: 6357302368020002674}
   - component: {fileID: 6357302368020002675}
   m_Layer: 0
   m_Name: Functions Modal Container
@@ -64692,18 +64718,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &6357302368020002674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6357302368020002659}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1641c60c3252d1a4781562358eb83388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6357302368020002675
 MonoBehaviour:
   m_ObjectHideFlags: 0
