@@ -8,7 +8,6 @@ public class UiRotation : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject ui;
     void Start()
     {
         
@@ -42,8 +41,8 @@ public class UiRotation : MonoBehaviour
                     foreach (RaycastResult result in results)
                     {
                         Debug.Log("Name: " + result.gameObject.name);
-
-                        // result.gameObject.transform.Rotate(Vector3.forward, angle);
+                        
+                        result.gameObject.transform.parent.Rotate(Vector3.forward, angle);
                     }
                 }
             }
