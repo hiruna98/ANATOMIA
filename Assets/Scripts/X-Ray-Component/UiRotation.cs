@@ -42,12 +42,10 @@ public class UiRotation : MonoBehaviour
                     foreach (RaycastResult result in results)
                     {
                         Debug.Log("Name: " + result.gameObject.name);
-                        isRotating = true;
+                        
+                        result.gameObject.transform.parent.gameObject.transform.Rotate(Vector3.forward, angle);
                     }
-                    if(isRotating){
-                        transform.Rotate(Vector3.forward, angle);
-                        isRotating = false;
-                    }
+                    
                 }
             }
         }
