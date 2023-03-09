@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UiRotation : MonoBehaviour
 {
+    private bool isRotating = false;
     // Start is called before the first frame update
 
     void Start()
@@ -41,8 +42,11 @@ public class UiRotation : MonoBehaviour
                     foreach (RaycastResult result in results)
                     {
                         Debug.Log("Name: " + result.gameObject.name);
-                        
-                        result.gameObject.transform.parent.Rotate(Vector3.forward, angle);
+                        isRotating = true;
+                    }
+                    if(isRotating){
+                        transform.Rotate(Vector3.forward, angle);
+                        isRotating = false;
                     }
                 }
             }
