@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UiRotation : MonoBehaviour
 {
@@ -30,7 +32,19 @@ public class UiRotation : MonoBehaviour
                     angle *= 0.01f;
 
                     // Rotate the image by the scaled down angle
-                    ui.transform.Rotate(Vector3.forward, angle);
+                    
+
+                    PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+                    eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    List<RaycastResult> results = new List<RaycastResult>();
+                    EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+                    
+                    foreach (RaycastResult result in results)
+                    {
+                        Debug.Log("Name: " + result.gameObject.name);
+
+                        // result.gameObject.transform.Rotate(Vector3.forward, angle);
+                    }
                 }
             }
         }
