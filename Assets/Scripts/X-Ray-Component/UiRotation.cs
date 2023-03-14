@@ -42,7 +42,9 @@ public class UiRotation : MonoBehaviour
                     {
                         Debug.Log("Name: " + result.gameObject.name);
                         
-                        result.gameObject.transform.parent.Rotate(Vector3.forward, angle);
+                        GameObject obj = GameObject.Find(result.gameObject.name);
+                        
+                        obj.transform.Rotate(Vector3.forward, angle);
                     }
                 }
             }
