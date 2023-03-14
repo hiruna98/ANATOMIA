@@ -11,6 +11,7 @@ public class UiRotation : MonoBehaviour
     private List<GameObject> uiList;
     void Start()
     {
+        uiList = new List<GameObject>();
         uiList.AddRange(GameObject.FindGameObjectsWithTag("popup"));
     }
 
