@@ -77,7 +77,9 @@ public class DataStore
         catch (Exception e)
         {
             Debug.Log(e);
-            return (new DataModel("", "", "", "", "", ""));
+
+            return(new DataModel("","Not Available","Details are not available at the moment","","",""));
+
         }
     }
 

@@ -39,7 +39,7 @@ public class DetailLoad : MonoBehaviour
         dataStore = DataStore.Instance;
         activeObject = multiSelectStore.getSelectedObjects()[0];
         DataModel organ = dataStore.FindOrgan(activeObject.name);
-        title.text = organ.displayName;
+        title.text = organ.name;
         textField.text = organ.description;
         if(organ.name != ""){
             StartCoroutine(DownloadImage(organ.organImage));
