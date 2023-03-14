@@ -45,7 +45,7 @@ public class PinchScale : MonoBehaviour
                     initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
                     initialScale = _camera.transform.localPosition;
                 }
-                else if (touchZero.phase == TouchPhase.Moved || touchOne.phase == TouchPhase.Moved) // if touch is moved
+                else if (touchZero.phase == TouchPhase.Moved && touchOne.phase == TouchPhase.Moved) // if touch is moved
                 {
                     var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
 
