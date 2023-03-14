@@ -8,9 +8,11 @@ public class UiRotation : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    private List<GameObject> uiList;
     void Start()
     {
-        
+        uiList = new List<GameObject>();
+        uiList.AddRange(GameObject.FindGameObjectsWithTag("popup"));
     }
 
     // Update is called once per frame
@@ -24,27 +26,32 @@ public class UiRotation : MonoBehaviour
             {
                 if (Input.touches.Length == 2)
                 {
-                    // Calculate the rotation angle using the DeltaPosition vectors
-                    float angle = Mathf.Atan2(touch.deltaPosition.y, touch.deltaPosition.x) * Mathf.Rad2Deg;
+                    Touch touch1 = Input.GetTouch(0);
+                    Touch touch2 = Input.GetTouch(1);
 
-                    // Scale down the rotation angle by a factor
-                    angle *= 0.01f;
+                    if(touch1.phase == TouchPhase.Stationary && touch2.phase == TouchPhase.Moved){
+                        // Calculate the rotation angle using the DeltaPosition vectors
+                        float angle = Mathf.Atan2(touch.deltaPosition.y, touch.deltaPosition.x) * Mathf.Rad2Deg;
 
-                    // Rotate the image by the scaled down angle
-                    
+                        // Scale down the rotation angle by a factor
+                        angle *= 0.01f;
 
-                    PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-                    eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                    List<RaycastResult> results = new List<RaycastResult>();
-                    EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-                    
-                    foreach (RaycastResult result in results)
-                    {
-                        Debug.Log("Name: " + result.gameObject.name);
+                        // Rotate the image by the scaled down angle
                         
-                        GameObject obj = GameObject.Find(result.gameObject.name);
+
+                        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+                        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                        List<RaycastResult> results = new List<RaycastResult>();
+                        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
                         
-                        obj.transform.Rotate(Vector3.forward, angle);
+                        foreach (RaycastResult result in results)
+                        {
+                            Debug.Log("Name: " + result.gameObject.transform.parent.name);
+
+                            GameObject obj = uiList.Find(rotateObj => rotateObj.name == result.gameObject.transform.parent.name);
+                            
+                            obj.transform.Rotate(Vector3.forward, angle);
+                        }
                     }
                 }
             }
