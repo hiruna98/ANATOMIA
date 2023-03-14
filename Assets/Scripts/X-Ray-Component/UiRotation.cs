@@ -8,9 +8,10 @@ public class UiRotation : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    private List<GameObject> uiList;
     void Start()
     {
-        
+        uiList.AddRange(GameObject.FindGameObjectsWithTag("popup"));
     }
 
     // Update is called once per frame
@@ -41,8 +42,8 @@ public class UiRotation : MonoBehaviour
                     foreach (RaycastResult result in results)
                     {
                         Debug.Log("Name: " + result.gameObject.name);
-                        
-                        GameObject obj = GameObject.Find(result.gameObject.name);
+
+                        GameObject obj = uiList.Find(rotateObj => rotateObj.name == result.gameObject.name);
                         
                         obj.transform.Rotate(Vector3.forward, angle);
                     }
