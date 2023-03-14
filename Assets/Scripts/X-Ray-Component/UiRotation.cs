@@ -41,9 +41,9 @@ public class UiRotation : MonoBehaviour
                     
                     foreach (RaycastResult result in results)
                     {
-                        Debug.Log("Name: " + result.gameObject.name);
+                        Debug.Log("Name: " + result.gameObject.transform.parent.name);
 
-                        GameObject obj = uiList.Find(rotateObj => rotateObj.name == result.gameObject.name);
+                        GameObject obj = uiList.Find(rotateObj => rotateObj.name == result.gameObject.transform.parent.name);
                         
                         obj.transform.Rotate(Vector3.forward, angle);
                     }
