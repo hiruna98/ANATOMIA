@@ -17,6 +17,9 @@ public class DetailLoad : MonoBehaviour
     [SerializeField] 
     private RawImage image;
 
+    [SerializeField] 
+    private Texture defaultTexture;
+
     private GameObject activeObject;
 
     private MultiSelectStore multiSelectStore;
@@ -31,14 +34,13 @@ public class DetailLoad : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        image.texture = defaultTexture;
         multiSelectStore = MultiSelectStore.Instance;
         dataStore = DataStore.Instance;
-        // content = gameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         activeObject = multiSelectStore.getSelectedObjects()[0];
         DataModel organ = dataStore.FindOrgan(activeObject.name);
         title.text = organ.displayName;
         textField.text = organ.description;
-        Debug.Log(organ.displayName);
         if(organ.name != ""){
             StartCoroutine(DownloadImage(organ.organImage));
         }
@@ -54,7 +56,7 @@ public class DetailLoad : MonoBehaviour
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
         if(request.isNetworkError || request.isHttpError) 
-            Debug.Log(request.error);
+            image.texture = defaultTexture;
         else
             image.texture = ((DownloadHandlerTexture) request.downloadHandler).texture;
     }
