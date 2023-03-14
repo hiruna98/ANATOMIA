@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class DrawManager : MonoBehaviour
 {
-
     public GameObject drawPrefab;
     public Material drawMaterial;
     private Color materialColor;
@@ -23,10 +22,12 @@ public class DrawManager : MonoBehaviour
     private GameObject radialMenuContainer;
     private GameObject viewModalContainer;
     private GameObject functionsModalContainer;
-    private GameObject infoModalContainer ;
+    private GameObject infoModalContainer;
     private GameObject layersModalContainer;
     private GameObject drawModalContainer;
     private GameObject colorModalContainer;
+
+    private DataStore dataStore;
 
     private Button viewBtn;
     private Button functionBtn;
@@ -44,51 +45,72 @@ public class DrawManager : MonoBehaviour
         drawModalContainer = GameObject.Find("Draw Modal Container");
         colorModalContainer = GameObject.Find("Draw Modal Container/Color Modal Container");
 
-        viewBtn = GameObject.Find("Radial Menu/Background/Elements/View/Button").GetComponent<Button>();
-        functionBtn = GameObject.Find("Radial Menu/Background/Elements/Functions/Button").GetComponent<Button>();
-        layersBtn = GameObject.Find("Radial Menu/Background/Elements/Layers/Button").GetComponent<Button>();
+        dataStore = DataStore.Instance;
+
+        viewBtn = GameObject
+            .Find("Radial Menu/Background/Elements/View/Button")
+            .GetComponent<Button>();
+        functionBtn = GameObject
+            .Find("Radial Menu/Background/Elements/Functions/Button")
+            .GetComponent<Button>();
+        layersBtn = GameObject
+            .Find("Radial Menu/Background/Elements/Layers/Button")
+            .GetComponent<Button>();
 
         trailRenderer = drawPrefab.GetComponent<TrailRenderer>();
 
-        if (drawPrefab == null) {
+        if (drawPrefab == null)
+        {
             Debug.Log("drawPrefab not found.");
         }
-        if (drawMaterial == null) {
+        if (drawMaterial == null)
+        {
             Debug.Log("drawMaterial not found.");
         }
 
-        if (radialMenuContainer == null) {
+        if (radialMenuContainer == null)
+        {
             Debug.Log("radialMenuContainer not found.");
-        } 
-        if (viewModalContainer == null) {
+        }
+        if (viewModalContainer == null)
+        {
             Debug.Log("viewModalContainer not found.");
         }
-        if (functionsModalContainer == null) {
+        if (functionsModalContainer == null)
+        {
             Debug.Log("functionsModalContainer not found.");
         }
-        if (infoModalContainer == null) {
+        if (infoModalContainer == null)
+        {
             Debug.Log("infoModalContainer not found.");
         }
-        if (layersModalContainer == null) {
+        if (layersModalContainer == null)
+        {
             Debug.Log("layersModalContainer not found.");
         }
-        if (drawModalContainer == null) {
+        if (drawModalContainer == null)
+        {
             Debug.Log("drawModalContainer not found.");
         }
-        if (colorModalContainer == null) {
+        if (colorModalContainer == null)
+        {
             Debug.Log("colorModalContainer not found.");
         }
 
-        if (viewBtn == null) {
+        if (viewBtn == null)
+        {
             Debug.Log("viewBtn not found.");
-        } 
-        if (functionBtn == null) {
+        }
+        if (functionBtn == null)
+        {
             Debug.Log("functionBtn not found.");
-        } 
-        if (layersBtn == null) {
+        }
+        if (layersBtn == null)
+        {
             Debug.Log("layersBtn not found.");
-        } 
-        if (trailRenderer == null) {
+        }
+        if (trailRenderer == null)
+        {
             Debug.Log("trailRenderer not found.");
         }
 
@@ -105,21 +127,24 @@ public class DrawManager : MonoBehaviour
 
     void Update()
     {
-        if(isDrawActive)
+        if (isDrawActive)
         {
-            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetMouseButtonDown(0))
+            if (
+                Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began
+                || Input.GetMouseButtonDown(0)
+            )
             {
                 // Check if the touch is within the specified UI element
                 Vector2 inputPosition = Input.mousePosition;
                 // bool isTouchOverUI = IsTouchOverUIElement(inputPosition);
-                if(IsTouchOverUIObject())
+                if (IsTouchOverUIObject())
                 {
                     return;
                 }
 
                 // Set the UI color to white if its the first time
                 Material newMaterial = new Material(drawMaterial);
-                if(materialColor != null)
+                if (materialColor != null)
                 {
                     newMaterial.color = materialColor;
                 }
@@ -129,42 +154,49 @@ public class DrawManager : MonoBehaviour
                     newMaterial.color = materialColor;
                 }
 
-                theTrail = (GameObject)Instantiate(drawPrefab, this.transform.position, Quaternion.identity);
+                theTrail = (GameObject)Instantiate(
+                    drawPrefab,
+                    this.transform.position,
+                    Quaternion.identity
+                );
                 theTrail.GetComponent<TrailRenderer>().material = newMaterial;
                 theTrail.name = drawObjectTag;
                 theTrail.tag = drawObjectTag;
 
                 Ray mouseRay = mainCamera.ScreenPointToRay(inputPosition);
                 float dist;
-                if(planeObj.Raycast(mouseRay, out dist))
+                if (planeObj.Raycast(mouseRay, out dist))
                 {
                     startPos = mouseRay.GetPoint(dist);
                 }
             }
-            else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetMouseButton(0))
+            else if (
+                Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved
+                || Input.GetMouseButton(0)
+            )
             {
                 // Check if the touch is within the specified UI element
                 Vector2 inputPosition = Input.mousePosition;
                 // bool isTouchOverUI = IsTouchOverUIElement(inputPosition);
-                if(IsTouchOverUIObject())
+                if (IsTouchOverUIObject())
                 {
                     return;
                 }
 
                 Ray mouseRay = mainCamera.ScreenPointToRay(inputPosition);
                 float dist;
-                if(planeObj.Raycast(mouseRay, out dist))
+                if (planeObj.Raycast(mouseRay, out dist))
                 {
                     theTrail.transform.position = mouseRay.GetPoint(dist);
                 }
             }
-        } 
+        }
     }
 
     private bool IsTouchOverUIElement(Vector2 touchPosition)
     {
         GameObject uiElement = GameObject.Find("Draw Modal");
-        if(uiElement == null)
+        if (uiElement == null)
         {
             Debug.Log("uiElement not found");
             return false;
@@ -173,10 +205,15 @@ public class DrawManager : MonoBehaviour
         // Convert touch position from screen space to local space within the UI element's RectTransform
         RectTransform rectTransform = uiElement.GetComponent<RectTransform>();
         Vector2 localPoint;
-        bool isInside = RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, touchPosition, null, out localPoint);
+        bool isInside = RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rectTransform,
+            touchPosition,
+            null,
+            out localPoint
+        );
 
         // Check if local position is inside the element's bounds
-        if(isInside && rectTransform.rect.Contains(localPoint))
+        if (isInside && rectTransform.rect.Contains(localPoint))
         {
             Debug.Log("Touch is inside the element");
             return true; // Touch is inside the element
@@ -192,10 +229,13 @@ public class DrawManager : MonoBehaviour
     {
         // Check if the touch/click is over the UI object
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        eventDataCurrentPosition.position = new Vector2(
+            Input.mousePosition.x,
+            Input.mousePosition.y
+        );
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        
+
         foreach (RaycastResult result in results)
         {
             Debug.Log("Name: " + result.gameObject.name);
@@ -217,6 +257,8 @@ public class DrawManager : MonoBehaviour
         layersModalContainer.SetActive(false);
 
         drawModalContainer.SetActive(true);
+
+        dataStore.setIsDrawing(true);
 
         isDrawActive = true;
     }
@@ -241,15 +283,17 @@ public class DrawManager : MonoBehaviour
         /* Clears everything drawn */
         deleteAllDrawObjects();
 
+        dataStore.setIsDrawing(false);
     }
 
     public void eraseEverythingDrawn()
-    {   
+    {
         Debug.Log("eraseEverythingDrawn() called");
         deleteAllDrawObjects();
     }
 
-    private void deleteAllDrawObjects(){
+    private void deleteAllDrawObjects()
+    {
         GameObject[] drawObjects = GameObject.FindGameObjectsWithTag(drawObjectTag);
         foreach (GameObject obj in drawObjects)
         {
@@ -267,13 +311,13 @@ public class DrawManager : MonoBehaviour
         switch (color)
         {
             case "red":
-                ColorUtility.TryParseHtmlString("#f04369", out materialColor); 
+                ColorUtility.TryParseHtmlString("#f04369", out materialColor);
                 break;
             case "blue":
-                ColorUtility.TryParseHtmlString("#47a3ff", out materialColor);  
+                ColorUtility.TryParseHtmlString("#47a3ff", out materialColor);
                 break;
             case "green":
-                ColorUtility.TryParseHtmlString("#1de051", out materialColor);  
+                ColorUtility.TryParseHtmlString("#1de051", out materialColor);
                 break;
             case "pink":
                 ColorUtility.TryParseHtmlString("#cf57ff", out materialColor);
@@ -283,5 +327,4 @@ public class DrawManager : MonoBehaviour
                 break;
         }
     }
-
 }

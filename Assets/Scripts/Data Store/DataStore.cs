@@ -15,16 +15,17 @@ public class DataStore
 
     private bool isObjectCut = false;
 
+    private bool isDrawing = false;
+
     private Vector3 cutPointA;
     private Vector3 cutPointB;
     private Vector3 cutPointC;
 
-
     private DataStore()
     {
-       cutPointA = new Vector3(0,0,0);
-       cutPointB = new Vector3(0,0,0);
-       cutPointC = new Vector3(0,0,0);
+        cutPointA = new Vector3(0, 0, 0);
+        cutPointB = new Vector3(0, 0, 0);
+        cutPointC = new Vector3(0, 0, 0);
     }
 
     private static DataStore instance = null;
@@ -40,25 +41,32 @@ public class DataStore
         }
     }
 
-    public bool getCrossSectionSelection(){
+    public bool getCrossSectionSelection()
+    {
         return crossSectionSelection;
     }
 
-    public void setCrossSectionSelection(bool value){
+    public void setCrossSectionSelection(bool value)
+    {
         crossSectionSelection = value;
     }
 
-    public bool getIsObjectCut(){
+    public bool getIsObjectCut()
+    {
         return isObjectCut;
     }
 
-    public void setIsObjectCut(bool value){
+    public void setIsObjectCut(bool value)
+    {
         isObjectCut = value;
     }
 
-    public DataModel FindOrgan(string name){
-        try{
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("http://localhost:3000/organ/"+name));
+    public DataModel FindOrgan(string name)
+    {
+        try
+        {
+            HttpWebRequest request = (HttpWebRequest)
+                WebRequest.Create(String.Format("http://localhost:3000/organ/" + name));
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string jsonResponse = reader.ReadToEnd();
@@ -66,40 +74,52 @@ public class DataStore
 
             return info;
         }
-        catch(Exception e){
+        catch (Exception e)
+        {
             Debug.Log(e);
-            return(new DataModel("","","","","",""));
+            return (new DataModel("", "", "", "", "", ""));
         }
-        
     }
 
-    public void WriteOrgan(string name){
-        
-    }
+    public void WriteOrgan(string name) { }
 
-    public Vector3 getCutPointA(){
+    public Vector3 getCutPointA()
+    {
         return cutPointA;
     }
 
-    public void setCutPointA(Vector3 v){
+    public void setCutPointA(Vector3 v)
+    {
         this.cutPointA = v;
     }
 
-    public Vector3 getCutPointB(){
+    public Vector3 getCutPointB()
+    {
         return cutPointB;
     }
 
-    public void setCutPointB(Vector3 v){
+    public void setCutPointB(Vector3 v)
+    {
         this.cutPointB = v;
     }
 
-    public Vector3 getCutPointC(){
+    public Vector3 getCutPointC()
+    {
         return cutPointC;
     }
 
-    public void setCutPointC(Vector3 v){
+    public void setCutPointC(Vector3 v)
+    {
         this.cutPointC = v;
     }
 
+    public bool getIsDrawing()
+    {
+        return isDrawing;
+    }
 
+    public void setIsDrawing(bool x)
+    {
+        this.isDrawing = x;
+    }
 }

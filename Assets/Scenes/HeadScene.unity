@@ -5841,7 +5841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fc18247e690bb4b806cf5f76caa6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 126138777}
 --- !u!1 &372696606
 GameObject:
   m_ObjectHideFlags: 0
@@ -17525,7 +17524,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 0.05
-  _camera: {fileID: 4562127349385003198}
 --- !u!1 &982466263
 GameObject:
   m_ObjectHideFlags: 0
@@ -29039,6 +29037,7 @@ MonoBehaviour:
   title: {fileID: 6696540296321914218}
   textField: {fileID: 4546540355628910280}
   image: {fileID: 519019519}
+  defaultTexture: {fileID: 2800000, guid: 267be41ab083bf249a6b61e01a78189e, type: 3}
 --- !u!1 &1535221483
 GameObject:
   m_ObjectHideFlags: 0
@@ -52633,7 +52632,7 @@ GameObject:
   - component: {fileID: 2924078039981105468}
   - component: {fileID: 6616749549569823804}
   m_Layer: 0
-  m_Name: skin Cross section
+  m_Name: Skin
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63669,7 +63668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fc18247e690bb4b806cf5f76caa6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 6357302367543088271}
 --- !u!224 &6357302368059086896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -63984,7 +63982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fc18247e690bb4b806cf5f76caa6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 6357302367693741836}
 --- !u!114 &6357302368110576396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74750,7 +74747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fc18247e690bb4b806cf5f76caa6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 8162221675391727141}
 --- !u!224 &8162221674977799792
 RectTransform:
   m_ObjectHideFlags: 0

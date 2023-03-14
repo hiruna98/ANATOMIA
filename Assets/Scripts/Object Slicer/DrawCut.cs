@@ -5,10 +5,9 @@ using Lean.Touch;
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class DrawCut : MonoBehaviour
 {
-   // public Transform boxVis;
+    // public Transform boxVis;
     Vector3 pointA;
     Vector3 pointB;
     Vector3 pointC;
@@ -28,7 +27,8 @@ public class DrawCut : MonoBehaviour
 
     Camera cam;
 
-    void Start() {
+    void Start()
+    {
         cam = FindObjectOfType<Camera>();
         cutRender = GetComponent<LineRenderer>();
         cutRender.startWidth = .05f;
@@ -41,45 +41,58 @@ public class DrawCut : MonoBehaviour
 
     void Update()
     {
-        Vector3 mouse = Input.mousePosition;
-        mouse.z = -cam.transform.position.z;
-
-
-        //Touch
-        if (Input.touchCount == 6 && Input.GetTouch(5).phase == TouchPhase.Began)
+        if (!dataStore.getIsDrawing())
         {
-            pointA = cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(5).position.x,Input.GetTouch(5).position.y,(rootObject.transform.position.z-cam.transform.position.z)));
-            // pointA = cam.ScreenToWorldPoint(mouse);
-            dataStore.setCutPointA(pointA);
-        }
+            Vector3 mouse = Input.mousePosition;
+            mouse.z = -cam.transform.position.z;
 
-        if (Input.touchCount == 6)
-        {
-            animateCut = false;
-            cutRender.SetPosition(0,pointA);
-            cutRender.SetPosition(1,cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(5).position.x,Input.GetTouch(5).position.y,(rootObject.transform.position.z-cam.transform.position.z))));
-            //cutRender.SetPosition(1,cam.ScreenToWorldPoint(mouse));
-            cutRender.startColor = Color.gray;
-            cutRender.endColor = Color.gray;
-        }
+            //Touch
+            if (Input.touchCount == 6 && Input.GetTouch(5).phase == TouchPhase.Began)
+            {
+                pointA = cam.ScreenToWorldPoint(
+                    new Vector3(
+                        Input.GetTouch(5).position.x,
+                        Input.GetTouch(5).position.y,
+                        (rootObject.transform.position.z - cam.transform.position.z)
+                    )
+                );
+                dataStore.setCutPointA(pointA);
+            }
 
-        if (Input.touchCount == 6 && Input.GetTouch(5).phase == TouchPhase.Ended) {
-            pointB = cam.ScreenToWorldPoint(new Vector3(Input.GetTouch(5).position.x,Input.GetTouch(5).position.y,(rootObject.transform.position.z-cam.transform.position.z)));
-            // pointB = cam.ScreenToWorldPoint(mouse);
-            dataStore.setCutPointB(pointB);
-            //CreateSlicePlane();
-            cutRender.positionCount = 2;
-            cutRender.SetPosition(0,pointA);
-            cutRender.SetPosition(1,pointB);
-            animateCut = true;
-            dataStore.setCrossSectionSelection(true);
-        }
+            if (Input.touchCount == 6)
+            {
+                animateCut = false;
+                cutRender.SetPosition(0, pointA);
+                cutRender.SetPosition(
+                    1,
+                    cam.ScreenToWorldPoint(
+                        new Vector3(
+                            Input.GetTouch(5).position.x,
+                            Input.GetTouch(5).position.y,
+                            (rootObject.transform.position.z - cam.transform.position.z)
+                        )
+                    )
+                );
+                cutRender.startColor = Color.gray;
+                cutRender.endColor = Color.gray;
+            }
 
-        // if (animateCut)
-        // {
-        //     cutRender.SetPosition(0,Vector3.Lerp(pointA,pointB,1f));
-        // }
+            if (Input.touchCount == 6 && Input.GetTouch(5).phase == TouchPhase.Ended)
+            {
+                pointB = cam.ScreenToWorldPoint(
+                    new Vector3(
+                        Input.GetTouch(5).position.x,
+                        Input.GetTouch(5).position.y,
+                        (rootObject.transform.position.z - cam.transform.position.z)
+                    )
+                );
+                dataStore.setCutPointB(pointB);
+                cutRender.positionCount = 2;
+                cutRender.SetPosition(0, pointA);
+                cutRender.SetPosition(1, pointB);
+                animateCut = true;
+                dataStore.setCrossSectionSelection(true);
+            }
+        }
     }
-    
-
 }
