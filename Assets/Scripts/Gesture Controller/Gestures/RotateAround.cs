@@ -10,11 +10,13 @@ public class RotateAround : MonoBehaviour
 
     public GameObject rotatePoint;
 
+    private DataStore dataStore;
 
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        dataStore = DataStore.Instance;
     }
 
     // Update is called once per frame
@@ -28,29 +30,42 @@ public class RotateAround : MonoBehaviour
                 Ray ray = cam.ScreenPointToRay(touch.position);
                 RaycastHit hit;
 
-                switch (touch.phase)
+                if (!dataStore.getIsDrawing())
                 {
-                    case TouchPhase.Began:
-                        if(Physics.Raycast(ray, out hit)){
-                            GameObject hitObject = hit.transform.gameObject;
-                            if(hitObject.tag == "Object" || hitObject.tag == "clipping object"){
-                                rotating = true;
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            if (Physics.Raycast(ray, out hit))
+                            {
+                                GameObject hitObject = hit.transform.gameObject;
+                                if (hitObject.tag == "Object" || hitObject.tag == "clipping object")
+                                {
+                                    rotating = true;
+                                }
                             }
-                        }
-                        break;
-                    case TouchPhase.Moved:
-                        if(rotating){
-                           // transform.Rotate(-touch.deltaPosition.y,-touch.deltaPosition.x,0f, Space.Self);
-                            transform.RotateAround(rotatePoint.transform.position,Vector3.down,touch.deltaPosition.x);
-                            transform.RotateAround(rotatePoint.transform.position,Vector3.right,touch.deltaPosition.y);
-                        }
-                        break;
-                    case TouchPhase.Ended:
-                        rotating = false;
-                        break;
+                            break;
+                        case TouchPhase.Moved:
+                            if (rotating)
+                            {
+                                // transform.Rotate(-touch.deltaPosition.y,-touch.deltaPosition.x,0f, Space.Self);
+                                transform.RotateAround(
+                                    rotatePoint.transform.position,
+                                    Vector3.down,
+                                    touch.deltaPosition.x
+                                );
+                                transform.RotateAround(
+                                    rotatePoint.transform.position,
+                                    Vector3.right,
+                                    touch.deltaPosition.y
+                                );
+                            }
+                            break;
+                        case TouchPhase.Ended:
+                            rotating = false;
+                            break;
+                    }
                 }
-                
             }
-        }   
+        }
     }
 }
