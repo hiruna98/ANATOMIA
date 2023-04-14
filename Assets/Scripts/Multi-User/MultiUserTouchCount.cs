@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MultiUserTouchCount : MonoBehaviour
 {
-    public float dividingLineY = 0.5f;
+    public float dividingLineY = 0;
     public int touchesTop = 0;
     public int touchesBottom = 0;
 

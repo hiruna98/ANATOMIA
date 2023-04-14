@@ -11,10 +11,13 @@ public class RadialMenuDragController : MonoBehaviour
     private UIRotateController uIRotateController;
 
     private bool rotationEnable = true;
+
+    private DataStore dataStore;
     
 
     public void dragHandler(BaseEventData data){
         uIRotateController = UIRotateController.Instance;
+        dataStore = DataStore.Instance;
         PointerEventData pointerData = (PointerEventData)data;
 
         Vector2 position;
@@ -28,6 +31,15 @@ public class RadialMenuDragController : MonoBehaviour
         transform.position = canvas.transform.TransformPoint(position.x,position.y,0);
         uIRotateController.Rotate(transform,transform);
         RotateUI();
+
+        // Debug.Log(transform.position.y);
+        if(transform.position.y < 0 + dataStore.getDividingLineY())
+        {
+            dataStore.setIsRadialTop(false);
+        }else
+        {
+            dataStore.setIsRadialTop(true);
+        }
     }
 
     public void RotateUI()

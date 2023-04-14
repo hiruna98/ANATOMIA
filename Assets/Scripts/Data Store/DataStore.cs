@@ -17,6 +17,24 @@ public class DataStore
 
     private bool isDrawing = false;
 
+    private bool multiUserEnable = true;
+
+    private bool isRadialTop = false;
+
+    private float dividingLineY = 0.5f;
+
+    private bool objectTakenByTop = false;
+
+    private bool objectTakenByBottom = false;
+
+    private bool scaleByTop = false;
+
+    private bool scaleByBottom = false;
+
+    private bool rotateByTop = false;
+
+    private bool rotateByBottom = false;
+
     private Vector3 cutPointA;
     private Vector3 cutPointB;
     private Vector3 cutPointC;
@@ -41,6 +59,15 @@ public class DataStore
         }
     }
 
+    public float getDividingLineY()
+    {
+        return dividingLineY;
+    }
+
+    public void setDividingLineY(float value)
+    {
+        dividingLineY = value;
+    }
     public bool getCrossSectionSelection()
     {
         return crossSectionSelection;
@@ -49,6 +76,86 @@ public class DataStore
     public void setCrossSectionSelection(bool value)
     {
         crossSectionSelection = value;
+    }
+
+    public bool getObjectTakenByTop()
+    {
+        return objectTakenByTop;
+    }
+
+    public void setObjectTakenByTop(bool value)
+    {
+        objectTakenByTop = value;
+    }
+
+    public bool getObjectTakenByBottom()
+    {
+        return objectTakenByBottom;
+    }
+
+    public void setObjectTakenByBottom(bool value)
+    {
+        objectTakenByBottom = value;
+    }
+
+    public bool getScaleByBottom()
+    {
+        return scaleByBottom;
+    }
+
+    public void setScaleByBottom(bool value)
+    {
+        scaleByBottom = value;
+    }
+
+    public bool getScaleByTop()
+    {
+        return scaleByTop;
+    }
+
+    public void setScaleByTop(bool value)
+    {
+        scaleByTop = value;
+    }
+
+    public bool getRotateByTop()
+    {
+        return rotateByTop;
+    }
+
+    public void setRotateByTop(bool value)
+    {
+        rotateByTop = value;
+    }
+
+    public bool getRotateByBottom()
+    {
+        return rotateByBottom;
+    }
+
+    public void setRotateByBottom(bool value)
+    {
+        rotateByBottom = value;
+    }
+
+    public bool getIsRadialTop()
+    {
+        return isRadialTop;
+    }
+
+    public void setIsRadialTop(bool value)
+    {
+        isRadialTop = value;
+    }
+
+    public bool getMultiUserEnable()
+    {
+        return multiUserEnable;
+    }
+
+    public void setMultiUserEnable(bool value)
+    {
+        multiUserEnable = value;
     }
 
     public bool getIsObjectCut()
