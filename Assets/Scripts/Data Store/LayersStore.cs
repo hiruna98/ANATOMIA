@@ -80,4 +80,16 @@ public class LayersStore
             });
         }
     }
+
+    public void setEnable(bool value, string name){
+        layers.ForEach(obj => {
+            if(obj.originalObj.name == name){
+                obj.isEnable = value;
+                obj.originalObj.SetActive(value);
+                obj.clippingObj.SetActive(value);
+            }
+        });
+
+
+    }
 }

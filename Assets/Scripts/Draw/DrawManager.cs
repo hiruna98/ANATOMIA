@@ -238,8 +238,6 @@ public class DrawManager : MonoBehaviour
 
         foreach (RaycastResult result in results)
         {
-            Debug.Log("Name: " + result.gameObject.name);
-
             if (result.gameObject.name == "Draw Modal" || result.gameObject.name == "Color Modal")
             {
                 return true;
