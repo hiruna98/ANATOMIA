@@ -34,7 +34,7 @@ public class AccessibilityBtnController : MonoBehaviour
         radialMenu = GameObject.Find("Radial Menu");
         viewModal = GameObject.Find("View Modal");
         functionsModal = GameObject.Find("Functions Modal");
-        // infoModal = GameObject.Find("Info Modal");
+        infoModal = GameObject.Find("Info Modal");
         layersModal = GameObject.Find("Layers Modal");
         layersSelectModal = GameObject.Find("Layers Select Modal");
 
@@ -48,7 +48,7 @@ public class AccessibilityBtnController : MonoBehaviour
         if(!radialMenu) Debug.Log("radialMenu not found");
         if(!viewModal) Debug.Log("viewModal not found");
         if(!functionsModal) Debug.Log("functionsModal not found");
-        // if(!infoModal) Debug.Log("infoModal not found");
+        if(!infoModal) Debug.Log("infoModal not found");
         if(!layersModal) Debug.Log("layersModal not found");
         if(!layersSelectModal) Debug.Log("layersSelectModal not found");
 
@@ -86,13 +86,13 @@ public class AccessibilityBtnController : MonoBehaviour
     public void handleFunctionsMenuOpen()
     {
         functionsModal.SetActive(true);
-        functionBtn.interactable = false;
+        // functionBtn.interactable = false;
     }
 
     public void handleFunctionsMenuClose()
     {
         functionsModal.SetActive(false); 
-        functionBtn.interactable = true;
+        // functionBtn.interactable = true;
     }
 
     public void handleFunctionsMenuLock()
@@ -106,13 +106,13 @@ public class AccessibilityBtnController : MonoBehaviour
     public void handleViewMenuOpen()
     {
         viewModal.SetActive(true);
-        viewBtn.interactable = false;
+        // viewBtn.interactable = false;
     }
 
     public void handleViewMenuClose()
     {
         viewModal.SetActive(false);
-        viewBtn.interactable = true;
+        // viewBtn.interactable = true;
     }
 
     public void handleViewMenuLock()
@@ -156,13 +156,13 @@ public class AccessibilityBtnController : MonoBehaviour
     public void handleLayersModalOpen()
     {
         layersModal.SetActive(true);
-        layersBtn.interactable = false;
+        // layersBtn.interactable = false;
     }
 
     public void handleLayersModalClose()
     {
         layersModal.SetActive(false);
-        layersBtn.interactable = true;
+        // layersBtn.interactable = true;
     }
 
     /*
@@ -181,9 +181,9 @@ public class AccessibilityBtnController : MonoBehaviour
     {
         radialMenu.SetActive(true);
         layersSelectModal.SetActive(false);
-        layersBtn.interactable = true;
-        viewBtn.interactable = true;
-        functionBtn.interactable = true;
+        // layersBtn.interactable = true;
+        // viewBtn.interactable = true;
+        // functionBtn.interactable = true;
     }
 
     public void onLayersPopupLockRotation(){
