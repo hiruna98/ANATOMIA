@@ -145,6 +145,8 @@ public class AccessibilityBtnController : MonoBehaviour
 
     public void handleInfoModelClose()
     {
+        Debug.Log("handleInfoModelClose called");
+        if(!infoModal) Debug.Log("infoModal not found");
         materialController.removeMaterialOfAllObjects();
         infoModal.SetActive(false);
         multiSelectStore.removeAllObject();
