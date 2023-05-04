@@ -69899,8 +69899,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663285337574}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784661991350638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71350,8 +71360,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663958228014}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!222 &6931784662497109336
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -71443,8 +71463,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663834133036}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784662500812481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73201,8 +73231,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784662669953121}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784663048419742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74239,8 +74279,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663889115096}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784663423247732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74256,8 +74306,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784664008449370}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!1 &6931784663423247737
 GameObject:
   m_ObjectHideFlags: 0
@@ -74484,8 +74544,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784662497109342}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!1 &6931784663489469072
 GameObject:
   m_ObjectHideFlags: 0
@@ -74635,8 +74705,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663714477383}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784663521609586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75359,8 +75439,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663495147894}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784663863009513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75638,8 +75728,18 @@ MonoBehaviour:
   uiHandleRectTransform: {fileID: 6931784663161675820}
   backgroundActiveColor: {r: 0.47058824, g: 0.38431373, b: 0.5568628, a: 1}
   handleActiveColor: {r: 0.40392157, g: 0.28235295, b: 0.5294118, a: 1}
-  layers: []
-  clippingRoot: {fileID: 0}
+  layers:
+  - {fileID: 1062066977730948700}
+  - {fileID: 2038901242683887496}
+  - {fileID: 7324594525113807076}
+  - {fileID: 6613139534084695363}
+  - {fileID: 5552332139543900346}
+  - {fileID: 889598193798732818}
+  - {fileID: 1798845866558614271}
+  - {fileID: 6242778164245873713}
+  - {fileID: 5944254218768508066}
+  - {fileID: 3436541821282829412}
+  clippingRoot: {fileID: 1902438698}
 --- !u!114 &6931784663892948926
 MonoBehaviour:
   m_ObjectHideFlags: 0
