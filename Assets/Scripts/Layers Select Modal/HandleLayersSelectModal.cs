@@ -4,44 +4,57 @@ using UnityEngine;
 
 public class HandleLayersSelectModal : MonoBehaviour
 {
-    private GameObject radialMenuContainer;
-    private GameObject viewModalContainer;
-    private GameObject functionsModalContainer;
-    private GameObject infoModalContainer ;
-    private GameObject layersModalContainer;
-    private GameObject drawModalContainer;
-    private GameObject colorModalContainer;
-    private GameObject layersSelectModalContainer;
+    private GameObject accessibilityBtn;
+    private GameObject radialMenu;
+    private GameObject viewModal;
+    private GameObject functionsModal;
+    public GameObject infoModal;
+    public GameObject drawModal;
+    public GameObject colorModal;
+    public GameObject layersModal;
+    public GameObject layersSelectModal;
 
     void Start()
     {
-        radialMenuContainer = GameObject.Find("Radial Menu Container");
-        viewModalContainer = GameObject.Find("View Modal Container");
-        functionsModalContainer = GameObject.Find("Functions Modal Container");
-        infoModalContainer = GameObject.Find("Info Modal Container");
-        layersModalContainer = GameObject.Find("Layers Modal Container");
-        drawModalContainer = GameObject.Find("Draw Modal Container");
-        colorModalContainer = GameObject.Find("Draw Modal Container/Color Modal Container");
-        layersSelectModalContainer = GameObject.Find("Layers Select Modal Container");
+        accessibilityBtn = GameObject.Find("Accessibility Btn");
+        radialMenu = GameObject.Find("Radial Menu");
+        viewModal = GameObject.Find("View Modal");
+        functionsModal = GameObject.Find("Functions Modal");
+        // infoModal = GameObject.Find("Info Modal");
+        drawModal = GameObject.Find("Draw Modal");
+        colorModal = GameObject.Find("Color Modal");
+        layersModal = GameObject.Find("Layers Modal");
+        layersSelectModal = GameObject.Find("Layers Select Modal");
+
+        // if(accessibilityBtn == null) Debug.Log("accessibilityBtn not found");
+        // if(radialMenu == null) Debug.Log("radialMenu not found");
+        // if(viewModal == null) Debug.Log("viewModal not found");
+        // if(functionsModal == null) Debug.Log("functionsModal not found");
+        // if(infoModal == null) Debug.Log("infoModal not found");
+        // if(drawModal == null) Debug.Log("drawModal not found");
+        // if(colorModal == null) Debug.Log("colorModal not found");
+        // if(layersModal == null) Debug.Log("layersModal not found");
+        // if(layersSelectModal == null) Debug.Log("layersSelectModal not found");
     }
 
     public void handleModalOpen()
     {
-        radialMenuContainer.SetActive(false);
-        viewModalContainer.SetActive(false);
-        functionsModalContainer.SetActive(false);
-        infoModalContainer.SetActive(false);
-        layersModalContainer.SetActive(false);
-        drawModalContainer.SetActive(false);
-        colorModalContainer.SetActive(false);
+        Debug.Log("handleModalOpen called");
 
-        layersSelectModalContainer.SetActive(true);
+        accessibilityBtn.SetActive(false);
+        radialMenu.SetActive(false);
+        viewModal.SetActive(false);
+        functionsModal.SetActive(false);
+        // infoModal.SetActive(false);
+        layersModal.SetActive(false);
+        drawModal.SetActive(false);
+        colorModal.SetActive(false);
     }
 
     public void handleModalClose()
     {
-        radialMenuContainer.SetActive(true);
+        radialMenu.SetActive(true);
 
-        layersSelectModalContainer.SetActive(false);
+        layersSelectModal.SetActive(false);
     }
 }

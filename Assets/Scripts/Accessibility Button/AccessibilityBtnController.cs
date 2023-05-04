@@ -10,11 +10,13 @@ public class AccessibilityBtnController : MonoBehaviour
     private GameObject radialMenu;
     private GameObject viewModal;
     private GameObject functionsModal;
-    public GameObject infoModel;
-    public GameObject layersModel;
+    private GameObject infoModal;
+    private GameObject layersModal;
+    private GameObject layersSelectModal;
 
     private Button viewBtn;
     private Button functionBtn;
+    private Button layersBtn;
 
     private MultiSelectStore multiSelectStore;
     private MaterialController materialController;
@@ -27,25 +29,38 @@ public class AccessibilityBtnController : MonoBehaviour
     {
         multiSelectStore = MultiSelectStore.Instance;
         materialController = MaterialController.Instance;
+        
         accessibilityBtn = GameObject.Find("Accessibility Btn");
         radialMenu = GameObject.Find("Radial Menu");
         viewModal = GameObject.Find("View Modal");
         functionsModal = GameObject.Find("Functions Modal");
-        // infoModel = GameObject.Find("Info Model");
+        // infoModal = GameObject.Find("Info Modal");
+        layersModal = GameObject.Find("Layers Modal");
+        layersSelectModal = GameObject.Find("Layers Select Modal");
 
         viewBtn = GameObject.Find("Radial Menu/Background/Elements/View/Button").GetComponent<Button>();
         functionBtn = GameObject.Find("Radial Menu/Background/Elements/Functions/Button").GetComponent<Button>();
-        layersPopupLockBtn = layersModel.transform.Find("Top Bar/Lock Btn").gameObject;
-        layersPopupUnlockBtn = layersModel.transform.Find("Top Bar/Unlock Btn").gameObject;
+        layersBtn = GameObject.Find("Radial Menu/Background/Elements/Layers/Button").GetComponent<Button>();
+        layersPopupLockBtn = layersModal.transform.Find("Top Bar/Lock Btn").gameObject;
+        layersPopupUnlockBtn = layersModal.transform.Find("Top Bar/Unlock Btn").gameObject;
+
+        if(!accessibilityBtn) Debug.Log("accessibilityBtn not found");
+        if(!radialMenu) Debug.Log("radialMenu not found");
+        if(!viewModal) Debug.Log("viewModal not found");
+        if(!functionsModal) Debug.Log("functionsModal not found");
+        // if(!infoModal) Debug.Log("infoModal not found");
+        if(!layersModal) Debug.Log("layersModal not found");
+        if(!layersSelectModal) Debug.Log("layersSelectModal not found");
+
     }
+
     void Start()
     {
-        
-        // layersModel = GameObject.Find("Layers Modal");
         radialMenu.SetActive(false);
-        viewModal.SetActive(false);
-        functionsModal.SetActive(false);
-        // layersModel.SetActive(false);
+        // viewModal.SetActive(false);
+        // functionsModal.SetActive(false);
+        // layersModal.SetActive(false);
+        // layersSelectModal.SetActive(false);
     }
 
 
@@ -121,31 +136,54 @@ public class AccessibilityBtnController : MonoBehaviour
     }
 
     /*
-    * Info model
+    * Info modal
     */
     public void handleInfoModelOpen()
     {
-        infoModel.SetActive(true);
+        infoModal.SetActive(true);
     }
 
     public void handleInfoModelClose()
     {
         materialController.removeMaterialOfAllObjects();
-        infoModel.SetActive(false);
+        infoModal.SetActive(false);
         multiSelectStore.removeAllObject();
     }
 
     /*
     * Layers model
     */
-    public void handleLayersModelOpen()
+    public void handleLayersModalOpen()
     {
-        layersModel.SetActive(true);
+        layersModal.SetActive(true);
+        layersBtn.interactable = false;
     }
 
-    public void handleLayersModelClose()
+    public void handleLayersModalClose()
     {
-        layersModel.SetActive(false);
+        layersModal.SetActive(false);
+        layersBtn.interactable = true;
+    }
+
+    /*
+    * Layers Select model
+    */
+    public void handleLayersSelectModelOpen()
+    {
+        // accessibilityBtn.SetActive(false);
+        // radialMenu.SetActive(false);
+        // viewModal.SetActive(false);
+        // functionsModal.SetActive(false);
+        // layersModal.SetActive(false);
+    }
+
+    public void handleLayersSelectModelClose()
+    {
+        radialMenu.SetActive(true);
+        layersSelectModal.SetActive(false);
+        layersBtn.interactable = true;
+        viewBtn.interactable = true;
+        functionBtn.interactable = true;
     }
 
     public void onLayersPopupLockRotation(){
