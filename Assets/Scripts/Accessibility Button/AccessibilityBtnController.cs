@@ -34,7 +34,7 @@ public class AccessibilityBtnController : MonoBehaviour
         radialMenu = GameObject.Find("Radial Menu");
         viewModal = GameObject.Find("View Modal");
         functionsModal = GameObject.Find("Functions Modal");
-        infoModal = GameObject.Find("Info Model");
+        infoModal = GameObject.Find("Info Modal Container");
         layersModal = GameObject.Find("Layers Modal");
         layersSelectModal = GameObject.Find("Layers Select Modal");
 
