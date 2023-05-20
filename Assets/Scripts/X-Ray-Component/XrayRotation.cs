@@ -36,7 +36,7 @@ public class XrayRotation : MonoBehaviour
                     _initialRotation = image2.rectTransform.localEulerAngles.z;
                 }
             }
-            else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
+            else if ((touch1.phase == TouchPhase.Stationary && touch2.phase == TouchPhase.Moved)||(touch1.phase == TouchPhase.Moved && touch2.phase == TouchPhase.Stationary))
             {
                 // Calculate the rotation angle using the DeltaPosition vectors
                 Vector2 currentTouchPosition = touch1.position - touch2.position;
