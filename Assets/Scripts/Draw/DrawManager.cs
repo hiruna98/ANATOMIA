@@ -261,6 +261,17 @@ public class DrawManager : MonoBehaviour
         isDrawActive = true;
     }
 
+    public void handleDrawActivationDrawScene()
+    {
+        radialMenuContainer.SetActive(false);
+
+        drawModalContainer.SetActive(true);
+
+        dataStore.setIsDrawing(true);
+
+        isDrawActive = true;
+    }
+
     public void handleDrawDeactivation()
     {
         radialMenuContainer.SetActive(true);
@@ -284,6 +295,21 @@ public class DrawManager : MonoBehaviour
         dataStore.setIsDrawing(false);
     }
 
+    public void handleDrawDeactivationInDrawScene()
+    {
+        radialMenuContainer.SetActive(true);
+
+        // dont deactivate drawModalContainer since its done in the animation
+        colorModalContainer.SetActive(false);
+
+        isDrawActive = false;
+
+        /* Clears everything drawn */
+        deleteAllDrawObjects();
+
+        dataStore.setIsDrawing(false);
+    }
+    
     public void eraseEverythingDrawn()
     {
         Debug.Log("eraseEverythingDrawn() called");
