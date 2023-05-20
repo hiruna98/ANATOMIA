@@ -19,8 +19,8 @@ public class ButtonEventHandler : MonoBehaviour
     private GameObject functionPopupLockBtn;
     private GameObject functionPopupUnlockBtn;
 
-    private GameObject infoPopupLockBtn;
-    private GameObject infoPopupUnlockBtn;
+    public GameObject infoPopupLockBtn;
+    public GameObject infoPopupUnlockBtn;
 
     public GameObject infoModel;
 
@@ -36,8 +36,8 @@ public class ButtonEventHandler : MonoBehaviour
         viewPopupUnlockBtn = GameObject.Find("View Modal/Top Bar/Unlock Btn");
         functionPopupLockBtn   = GameObject.Find("Functions Modal/Top Bar/Lock Btn");
         functionPopupUnlockBtn = GameObject.Find("Functions Modal/Top Bar/Unlock Btn");
-        infoPopupLockBtn   = GameObject.Find("Info Model/Top Bar/Lock Btn");
-        infoPopupUnlockBtn = GameObject.Find("Info Model/Top Bar/Unlock Btn");
+        // infoPopupLockBtn   = GameObject.Find("Info Model/Top Bar/Lock Btn");
+        // infoPopupUnlockBtn = GameObject.Find("Info Model/Top Bar/Unlock Btn");
     }
     public void onIsolateBtnClick()
     {
