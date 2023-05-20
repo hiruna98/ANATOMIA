@@ -20,10 +20,12 @@ public class LayerContorller : MonoBehaviour
 
     public void addLayer(){
         layersStore.addLayer();
+        Debug.Log("add");
     }
 
     public void removeLayer(){
         layersStore.removeLayer();
+        Debug.Log("hide");
     }
 
 }

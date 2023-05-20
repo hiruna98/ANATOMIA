@@ -52,6 +52,8 @@ public class LayersStore
         });
         activeLayers = list.Count;
         enableLayers = activeLayers;
+        Debug.Log(list.Count);
+        Debug.Log(enableLayers);
 
     }
 

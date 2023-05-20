@@ -44,7 +44,7 @@ public class LayersSwitchToggle : MonoBehaviour
 
     void Start() {
       layersStore = LayersStore.Instance;
-      layersStore.initializeLayers(layers,clippingRoot);
+      // layersStore.initializeLayers(layers,clippingRoot);
       
       toggleButton = GetComponent<Toggle>();
       toggleButton.isOn = true;
