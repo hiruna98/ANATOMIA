@@ -16,7 +16,7 @@ public class UIDragController : MonoBehaviour
 
 
     public void dragHandler(BaseEventData data){
-       
+       if(Input.touchCount == 1){
         uIRotateController = UIRotateController.Instance;
         PointerEventData pointerData = (PointerEventData)data;
 
@@ -29,7 +29,7 @@ public class UIDragController : MonoBehaviour
         );
 
         transform.position = canvas.transform.TransformPoint(position.x ,position.y,0);
-
+       }
         //uIRotateController.Rotate(transform);
     }
 
