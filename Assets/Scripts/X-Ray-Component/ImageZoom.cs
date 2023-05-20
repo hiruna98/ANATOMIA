@@ -9,7 +9,7 @@ public class ImageZoom : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private float _currentScale;
     public float minScale, maxScale;
     private float _temp;
-    private float _scalingRate = 1;
+    private float _scalingRate = 10;
 
     private void Start() {
         _currentScale = transform.localScale.x;
