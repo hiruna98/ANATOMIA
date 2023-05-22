@@ -24,11 +24,27 @@ public class AccessibilityBtnController : MonoBehaviour
     private GameObject layersPopupLockBtn;
     private GameObject layersPopupUnlockBtn;
     
+    public GameObject cutExitModel;
+
+    private DataStore dataStore;
+
+    private GameObject rootObject;
+    private GameObject clippingObject;
+    private GameObject originalObject;
+
+    private GameObject cutPlane;
+
 
     void Awake()
     {
         multiSelectStore = MultiSelectStore.Instance;
         materialController = MaterialController.Instance;
+        dataStore = DataStore.Instance;
+
+        rootObject = GameObject.Find("root_object");
+        clippingObject = rootObject.transform.Find("Clipping Object").gameObject;
+        originalObject = rootObject.transform.Find("Original Object").gameObject;
+        cutPlane = GameObject.Find("Clipping Plane");
         
         accessibilityBtn = GameObject.Find("Accessibility Btn");
         radialMenu = GameObject.Find("Radial Menu");
@@ -196,6 +212,18 @@ public class AccessibilityBtnController : MonoBehaviour
         PlayerPrefs.SetInt("Layers Model Container RotationLock",0);
         layersPopupLockBtn.SetActive(true);
         layersPopupUnlockBtn.SetActive(false);
+    }
+
+    public void onCutModelClose(){
+        if (dataStore.getIsObjectCut())
+        {
+            cutPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
+            cutPlane.transform.position = new Vector3(1, 1, 0);
+            originalObject.SetActive(true);
+            clippingObject.SetActive(false);
+            dataStore.setIsObjectCut(false);
+        }
+        cutExitModel.SetActive(false);
     }
 
 }

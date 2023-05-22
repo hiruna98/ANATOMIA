@@ -19,6 +19,8 @@ public class DrawCut : MonoBehaviour
     private GameObject clippingObject;
     private GameObject originalObject;
 
+    public GameObject cutExitModel;
+
     private Plane plane;
 
     private bool selectCut = false;
@@ -36,6 +38,7 @@ public class DrawCut : MonoBehaviour
         rootObject = GameObject.Find("root_object");
         clippingObject = rootObject.transform.Find("Clipping Object").gameObject;
         originalObject = rootObject.transform.Find("Original Object").gameObject;
+        cutExitModel.SetActive(false);
         dataStore = DataStore.Instance;
     }
 
@@ -92,6 +95,7 @@ public class DrawCut : MonoBehaviour
                 cutRender.SetPosition(1, pointB);
                 animateCut = true;
                 dataStore.setCrossSectionSelection(true);
+                cutExitModel.SetActive(true);
             }
         }
     }
