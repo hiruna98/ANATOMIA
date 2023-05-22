@@ -17,7 +17,7 @@ public class DataStore
 
     private bool isDrawing = false;
 
-    private bool multiUserEnable = true;
+    private bool multiUserEnable;
 
     private bool isRadialTop = false;
 

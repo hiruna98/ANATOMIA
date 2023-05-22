@@ -12,6 +12,8 @@ public class RotateAround : MonoBehaviour
 
     private DataStore dataStore;
 
+    public bool multiUserEnable;
+
     private int touchesTopCount = 0;
     private int touchesBottomCount = 0;
 
@@ -35,7 +37,7 @@ public class RotateAround : MonoBehaviour
 
         if (Input.touchCount > 0)
         {
-            if (dataStore.getMultiUserEnable()){
+            if (this.multiUserEnable){
                 getTouches();
                 if(touchesBottomCount == 1){
                     Touch touch = touchesBottom[0];
