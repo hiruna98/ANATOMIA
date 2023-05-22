@@ -97,13 +97,8 @@ public class TouchController : MonoBehaviour
         cutRender = GetComponent<LineRenderer>();
         clippingObject = root.transform.Find("Clipping Object").gameObject;
         originalObject = root.transform.Find("Original Object").gameObject;
-        // dataStore.setMultiUserEnable(this.multisilectEnable);
     }
 
-    // private void Start()
-    // {
-    //     dataStore.setMultiUserEnable(this.multisilectEnable);
-    // }
 
     private void Awake()
     {
