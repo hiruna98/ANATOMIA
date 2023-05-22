@@ -17224,6 +17224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatePoint: {fileID: 488993344}
+  multiUserEnable: 1
 --- !u!114 &979909519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17237,6 +17238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 0.05
+  multiUserEnable: 1
 --- !u!1 &982466263
 GameObject:
   m_ObjectHideFlags: 0

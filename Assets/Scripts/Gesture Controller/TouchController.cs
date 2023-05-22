@@ -16,6 +16,8 @@ public class TouchController : MonoBehaviour
 
     public Material selectionMat;
 
+    // public bool multiUserEnabled;
+
     private Vector2 startPos;
     private Vector2 endPos;
 
@@ -24,7 +26,7 @@ public class TouchController : MonoBehaviour
     private float timeLastPress = 0.0f;
     public float timeDelayThreshold = 1.0f;
 
-    private bool multisilectEnable = false;
+    private bool multisilectEnable;
 
     //maximum difference bitween startpos and endpos of single tap
     public float tapThreshold = 2.0f;
@@ -95,7 +97,13 @@ public class TouchController : MonoBehaviour
         cutRender = GetComponent<LineRenderer>();
         clippingObject = root.transform.Find("Clipping Object").gameObject;
         originalObject = root.transform.Find("Original Object").gameObject;
+        // dataStore.setMultiUserEnable(this.multisilectEnable);
     }
+
+    // private void Start()
+    // {
+    //     dataStore.setMultiUserEnable(this.multisilectEnable);
+    // }
 
     private void Awake()
     {

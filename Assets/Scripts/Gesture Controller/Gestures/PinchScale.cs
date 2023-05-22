@@ -12,6 +12,8 @@ public class PinchScale : MonoBehaviour
 
     private DataStore dataStore;
 
+    public bool multiUserEnable = false;
+
     private int touchesTopCount = 0;
     private int touchesBottomCount = 0;
 
@@ -30,7 +32,7 @@ public class PinchScale : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dataStore.getMultiUserEnable()){
+        if (this.multiUserEnable){
             getTouches();
             if(touchesBottomCount == 2){
                 Touch touch1 = touchesBottom[0];
